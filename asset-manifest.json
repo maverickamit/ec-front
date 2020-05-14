@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/amit-ghosh.com/ec-front/static/css/main.5f361e03.chunk.css",
+    "main.js": "/amit-ghosh.com/ec-front/static/js/main.74d041be.chunk.js",
+    "main.js.map": "/amit-ghosh.com/ec-front/static/js/main.74d041be.chunk.js.map",
+    "runtime-main.js": "/amit-ghosh.com/ec-front/static/js/runtime-main.7e2129d9.js",
+    "runtime-main.js.map": "/amit-ghosh.com/ec-front/static/js/runtime-main.7e2129d9.js.map",
+    "static/js/2.527483b1.chunk.js": "/amit-ghosh.com/ec-front/static/js/2.527483b1.chunk.js",
+    "static/js/2.527483b1.chunk.js.map": "/amit-ghosh.com/ec-front/static/js/2.527483b1.chunk.js.map",
+    "index.html": "/amit-ghosh.com/ec-front/index.html",
+    "precache-manifest.f296fbcacc03ae7e72900169c866eea3.js": "/amit-ghosh.com/ec-front/precache-manifest.f296fbcacc03ae7e72900169c866eea3.js",
+    "service-worker.js": "/amit-ghosh.com/ec-front/service-worker.js",
+    "static/css/main.5f361e03.chunk.css.map": "/amit-ghosh.com/ec-front/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.527483b1.chunk.js.LICENSE.txt": "/amit-ghosh.com/ec-front/static/js/2.527483b1.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/amit-ghosh.com/ec-front/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7e2129d9.js",
+    "static/js/2.527483b1.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.74d041be.chunk.js"
+  ]
+}
