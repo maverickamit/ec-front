@@ -15,10 +15,16 @@ const UserRegistration = () => {
     validationSchema: Yup.object({
       firstName: Yup.string()
         .max(15, "Must be 15 characters or less")
-        .required("Required"),
+        .required("Required")
+        .test("alphabets", "Name must only contain alphabets", (value) => {
+          return /^[A-Za-z]+$/.test(value);
+        }),
       lastName: Yup.string()
         .max(20, "Must be 20 characters or less")
-        .required("Required"),
+        .required("Required")
+        .test("alphabets", "Name must only contain alphabets", (value) => {
+          return /^[A-Za-z]+$/.test(value);
+        }),
       email: Yup.string().email("Invalid email address").required("Required"),
       password: Yup.string()
         .required("Required")
