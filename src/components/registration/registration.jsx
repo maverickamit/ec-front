@@ -8,6 +8,9 @@ const UserRegistration = () => {
       firstName: "",
       lastName: "",
       email: "",
+      password: "",
+      confirmPassword: "",
+      agreeToTerms: false,
     },
     validationSchema: Yup.object({
       firstName: Yup.string()
@@ -17,12 +20,28 @@ const UserRegistration = () => {
         .max(20, "Must be 20 characters or less")
         .required("Required"),
       email: Yup.string().email("Invalid email address").required("Required"),
+      password: Yup.string()
+        .required("Required")
+        .min(8, "Seems a bit short...")
+        .max(15, "Try a shorter password."),
+      confirmPassword: Yup.string()
+        .label("Confirm password")
+        .test("passwords-match", "Passwords don't match", function (value) {
+          return this.parent.password === value;
+        }),
+      agreeToTerms: Yup.boolean()
+        .label("Terms")
+        .test(
+          "is-true",
+          "Must agree to terms to continue",
+          (value) => value === true
+        ),
     }),
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
     },
   });
-  
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <div className="form-group ">
@@ -38,7 +57,9 @@ const UserRegistration = () => {
         />
       </div>
       {formik.touched.firstName && formik.errors.firstName ? (
-        <div>{formik.errors.firstName}</div>
+        <div class="alert alert-warning" role="alert">
+          {formik.errors.firstName}
+        </div>
       ) : null}
       <div className="form-group">
         <label htmlFor="lastName">Last Name</label>
@@ -53,7 +74,9 @@ const UserRegistration = () => {
         />
       </div>
       {formik.touched.lastName && formik.errors.lastName ? (
-        <div>{formik.errors.lastName}</div>
+        <div class="alert alert-warning" role="alert">
+          {formik.errors.lastName}
+        </div>
       ) : null}
       <div className="form-group">
         <label htmlFor="email">Email Address</label>
@@ -68,8 +91,61 @@ const UserRegistration = () => {
         />
       </div>
       {formik.touched.email && formik.errors.email ? (
-        <div>{formik.errors.email}</div>
+        <div class="alert alert-warning" role="alert">
+          {formik.errors.email}
+        </div>
       ) : null}
+      <div className="form-group">
+        <label htmlFor="Password">Password</label>
+        <input
+          className="form-control"
+          id="password"
+          name="password"
+          type="password"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.password}
+        />
+      </div>
+      {formik.touched.password && formik.errors.password ? (
+        <div class="alert alert-warning" role="alert">
+          {formik.errors.password}
+        </div>
+      ) : null}
+      <div className="form-group">
+        <label htmlFor="confirmPassword">Confirm Password</label>
+        <input
+          className="form-control"
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.confirmPassword}
+        />
+      </div>
+      {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+        <div class="alert alert-danger" role="alert">
+          {formik.errors.confirmPassword}
+        </div>
+      ) : null}
+      <div>
+        <input
+          id="agreeToTerms"
+          name="agreeToTerms"
+          type="checkbox"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.agreeToTerms}
+        />{" "}
+        I have read and agree to the Terms and Conditions and Privacy Policy
+      </div>
+      {formik.touched.agreeToTerms && formik.errors.agreeToTerms ? (
+        <div class="alert alert-info" role="alert">
+          {formik.errors.agreeToTerms}
+        </div>
+      ) : null}
+      <br></br>
       <button type="submit">Submit</button>
     </form>
   );
