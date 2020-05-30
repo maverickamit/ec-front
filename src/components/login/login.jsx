@@ -13,28 +13,26 @@ const UserLogin = () => {
       password: Yup.string().required("Required"),
     }),
     onSubmit: (values) => {
-      fetch("http://localhost:3000/users", {
+      fetch("http://localhost:3000/users/login", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          firstName: values.firstName,
-          lastName: values.lastName,
           email: values.email,
           password: values.password,
         }),
       })
         .then((response) => {
           if (response.status == 200) {
-            response.json();
+            return response.json();
           } else {
             return "unable to login";
           }
         })
         .then((data) => {
           if (data === "unable to login") {
-            alert("Unable to Login. Please check your ");
+            alert("Unable to Login. Username and/or password are incorrect.");
           } else {
-            alert("Successfully Registered");
+            alert("Welcome back " + data.firstName);
           }
         });
     },
