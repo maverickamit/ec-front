@@ -56,7 +56,7 @@ const UserRegistration = () => {
       })
         .then((response) => {
           if (response.status == 201) {
-            response.json();
+            return response.json();
           } else {
             return "unable to register";
           }
@@ -65,7 +65,7 @@ const UserRegistration = () => {
           if (data === "unable to register") {
             alert("Unable to Register. Email already in use.");
           } else {
-            alert("Successfully Registered");
+            alert(data.firstName + ", you are successfully registered");
           }
         });
     },
