@@ -44,7 +44,7 @@ const UserRegistration = () => {
         ),
     }),
     onSubmit: (values) => {
-      fetch("http://localhost:3000/users", {
+      fetch("https://everchange-backend.herokuapp.com/users", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
