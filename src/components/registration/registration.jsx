@@ -3,15 +3,23 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const UserRegistration = () => {
+  const initialValues = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    agreeToTerms: false,
+  };
+
+  function uncheck() {
+    if (document.getElementById("agreeToTerms").checked == true) {
+      document.getElementById("agreeToTerms").checked = false;
+    }
+  }
+
   const formik = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      agreeToTerms: false,
-    },
+    initialValues: initialValues,
     validationSchema: Yup.object({
       firstName: Yup.string()
         .max(15, "Must be 15 characters or less")
@@ -43,7 +51,7 @@ const UserRegistration = () => {
           (value) => value === true
         ),
     }),
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       fetch("https://everchange-backend.herokuapp.com/users", {
         method: "post",
         headers: { "Content-Type": "application/json" },
@@ -56,6 +64,8 @@ const UserRegistration = () => {
       })
         .then((response) => {
           if (response.status == 201) {
+            resetForm(initialValues);
+            uncheck();
             return response.json();
           } else {
             return "unable to register";
@@ -158,6 +168,7 @@ const UserRegistration = () => {
           {formik.errors.confirmPassword}
         </div>
       ) : null}
+
       <div>
         <input
           id="agreeToTerms"
@@ -169,6 +180,7 @@ const UserRegistration = () => {
         />{" "}
         I have read and agree to the Terms and Conditions and Privacy Policy
       </div>
+
       {formik.touched.agreeToTerms && formik.errors.agreeToTerms ? (
         <div class="alert alert-info" role="alert">
           {formik.errors.agreeToTerms}

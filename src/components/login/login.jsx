@@ -2,17 +2,19 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
+const initialValues = {
+  email: "",
+  password: "",
+};
+
 const UserLogin = () => {
   const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
+    initialValues: initialValues,
     validationSchema: Yup.object({
       email: Yup.string().email("Invalid email address").required("Required"),
       password: Yup.string().required("Required"),
     }),
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       fetch("https://everchange-backend.herokuapp.com/users/login", {
         method: "post",
         headers: { "Content-Type": "application/json" },
@@ -23,6 +25,7 @@ const UserLogin = () => {
       })
         .then((response) => {
           if (response.status == 200) {
+            resetForm(initialValues);
             return response.json();
           } else {
             return "unable to login";
