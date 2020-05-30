@@ -44,7 +44,30 @@ const UserRegistration = () => {
         ),
     }),
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      fetch("http://localhost:3000/users", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          password: values.password,
+        }),
+      })
+        .then((response) => {
+          if (response.status == 201) {
+            response.json();
+          } else {
+            return "unable to register";
+          }
+        })
+        .then((data) => {
+          if (data === "unable to register") {
+            alert("Unable to Register. Email already in use.");
+          } else {
+            alert("Successfully Registered");
+          }
+        });
     },
   });
 
