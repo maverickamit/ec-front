@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { observer } from "mobx-react";
@@ -10,6 +10,8 @@ const initialValues = {
 };
 
 const UserLogin = ({ userStore }) => {
+  const [alert, setAlert] = useState("");
+
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: Yup.object({
@@ -35,12 +37,15 @@ const UserLogin = ({ userStore }) => {
         })
         .then((data) => {
           if (data === "unable to login") {
-            alert("Unable to Login. Username and/or password are incorrect.");
+            setAlert(
+              "Unable to Login. Username and/or password are incorrect."
+            );
           } else {
+            setAlert("");
             userStore.setUser(data);
             userStore.setLoggedIn(true);
 
-            alert(userStore.user.user.firstName);
+            // alert(userStore.user.user.firstName);
           }
         });
     },
@@ -91,6 +96,11 @@ const UserLogin = ({ userStore }) => {
       <button type="submit" className="btn btn-primary">
         Login
       </button>
+      <br></br>
+      <br></br>
+      <div class="alert-danger" role="alert">
+        <p>{alert}</p>
+      </div>
     </form>
   );
 };
