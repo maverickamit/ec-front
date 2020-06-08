@@ -1,17 +1,14 @@
 import React from "react";
 import { observer } from "mobx-react";
 import "./profile.css";
+import { Redirect } from "react-router-dom";
 
 const UserProfile = ({ userStore }) => {
   var user = { firstName: "Please" };
   var user = userStore.user.user;
 
   if (!userStore.loggedIn) {
-    return (
-      <div>
-        <h5>Please Login First</h5>
-      </div>
-    );
+    return <Redirect to="/"></Redirect>;
   }
 
   return (
