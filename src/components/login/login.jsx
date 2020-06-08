@@ -38,6 +38,8 @@ const UserLogin = ({ userStore }) => {
             alert("Unable to Login. Username and/or password are incorrect.");
           } else {
             userStore.setUser(data);
+            userStore.setLoggedIn(true);
+
             alert(userStore.user.user.firstName);
           }
         });
@@ -45,7 +47,7 @@ const UserLogin = ({ userStore }) => {
   });
   // const { redirect } = this.state;
 
-  if (userStore.user.user) {
+  if (userStore.loggedIn) {
     return <Redirect to="/profile" />;
   }
 

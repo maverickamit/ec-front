@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import UserRegistration from "./components/registration/registration";
 import UserLogin from "./components/login/login";
+import UserProfile from "./components/profile/profile";
 import NavigationBar from "./components/navigation/navigation";
 import { Route } from "react-router-dom";
 import { observer } from "mobx-react";
@@ -22,6 +23,13 @@ function App({ userStore }) {
           exact
           component={(props) => (
             <UserRegistration {...props} userStore={userStore} />
+          )}
+        />
+        <Route
+          path="/profile"
+          exact
+          component={(props) => (
+            <UserProfile {...props} userStore={userStore} />
           )}
         />
       </div>
