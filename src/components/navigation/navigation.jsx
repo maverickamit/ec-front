@@ -4,7 +4,7 @@
 import { BrowserRouter as Router } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { observer } from "mobx-react";
-// import { autorun } from "mobx";
+import "./navigation.css";
 import React from "react";
 
 const NavigationBar = ({ userStore }) => {
