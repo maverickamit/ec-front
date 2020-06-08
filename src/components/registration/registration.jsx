@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { observer } from "mobx-react";
 
-const UserRegistration = () => {
+const UserRegistration = ({ userStore }) => {
+  const [alert, setAlert] = useState("");
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -73,9 +75,12 @@ const UserRegistration = () => {
         })
         .then((data) => {
           if (data === "unable to register") {
-            alert("Unable to Register. Email already in use.");
+            setAlert("Unable to Register. Email already in use.");
           } else {
-            alert(data.firstName + ", you are successfully registered");
+            setAlert(
+              data.user.firstName +
+                ", you are successfully registered. You can login now."
+            );
           }
         });
     },
@@ -190,8 +195,20 @@ const UserRegistration = () => {
       <button type="submit" className="btn btn-primary">
         Submit
       </button>
+      <br></br>
+      <br></br>
+
+      {alert == "Unable to Register. Email already in use." ? (
+        <div className=" alert-danger" role="alert">
+          {alert}
+        </div>
+      ) : (
+        <div className=" alert-success" role="alert">
+          {alert}
+        </div>
+      )}
     </form>
   );
 };
 
-export default UserRegistration;
+export default observer(UserRegistration);
