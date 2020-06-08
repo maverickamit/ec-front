@@ -96,7 +96,7 @@ const UserRegistration = () => {
         />
       </div>
       {formik.touched.firstName && formik.errors.firstName ? (
-        <div class="alert alert-warning" role="alert">
+        <div className="alert alert-warning" role="alert">
           {formik.errors.firstName}
         </div>
       ) : null}
@@ -113,7 +113,7 @@ const UserRegistration = () => {
         />
       </div>
       {formik.touched.lastName && formik.errors.lastName ? (
-        <div class="alert alert-warning" role="alert">
+        <div className="alert alert-warning" role="alert">
           {formik.errors.lastName}
         </div>
       ) : null}
@@ -130,7 +130,7 @@ const UserRegistration = () => {
         />
       </div>
       {formik.touched.email && formik.errors.email ? (
-        <div class="alert alert-warning" role="alert">
+        <div className="alert alert-warning" role="alert">
           {formik.errors.email}
         </div>
       ) : null}
@@ -147,7 +147,7 @@ const UserRegistration = () => {
         />
       </div>
       {formik.touched.password && formik.errors.password ? (
-        <div class="alert alert-warning" role="alert">
+        <div className="alert alert-warning" role="alert">
           {formik.errors.password}
         </div>
       ) : null}
@@ -164,7 +164,7 @@ const UserRegistration = () => {
         />
       </div>
       {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-        <div class="alert alert-danger" role="alert">
+        <div className="alert alert-danger" role="alert">
           {formik.errors.confirmPassword}
         </div>
       ) : null}
@@ -182,12 +182,12 @@ const UserRegistration = () => {
       </div>
 
       {formik.touched.agreeToTerms && formik.errors.agreeToTerms ? (
-        <div class="alert alert-info" role="alert">
+        <div className="alert alert-info" role="alert">
           {formik.errors.agreeToTerms}
         </div>
       ) : null}
       <br></br>
-      <button type="submit" class="btn btn-primary">
+      <button type="submit" className="btn btn-primary">
         Submit
       </button>
     </form>

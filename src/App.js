@@ -4,22 +4,29 @@ import UserRegistration from "./components/registration/registration";
 import UserLogin from "./components/login/login";
 import NavigationBar from "./components/navigation/navigation";
 import { Route } from "react-router-dom";
+import { observer } from "mobx-react";
 import { BrowserRouter as Router } from "react-router-dom";
 
-function App() {
+function App({ userStore }) {
   return (
     <Router>
       <div className="container">
-        <NavigationBar />
-        <Route path="/" exact component={(props) => <UserLogin {...props} />} />
+        <NavigationBar userStore={userStore} />
+        <Route
+          path="/"
+          exact
+          component={(props) => <UserLogin {...props} userStore={userStore} />}
+        />
         <Route
           path="/registration"
           exact
-          component={(props) => <UserRegistration {...props} />}
+          component={(props) => (
+            <UserRegistration {...props} userStore={userStore} />
+          )}
         />
       </div>
     </Router>
   );
 }
 
-export default App;
+export default observer(App);

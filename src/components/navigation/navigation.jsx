@@ -9,24 +9,24 @@ import React from "react";
 
 const NavigationBar = () => {
   return (
-    //     <nav class="navbar navbar-expand-sm bg-light">
-    //       <ul class="navbar-nav">
-    //         <li class="nav-item">
+    //     <nav className="navbar navbar-expand-sm bg-light">
+    //       <ul className="navbar-nav">
+    //         <li className="nav-item">
     //           <Link to="/">Login</Link>
     //         </li>
-    //         <li class="nav-item">
+    //         <li className="nav-item">
     //           <Link to="/registration">Sign Up</Link>
     //         </li>
     //       </ul>
     //     </nav>
     //   );
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="/">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <a className="navbar-brand" href="/">
         EverChange
       </a>
       <button
-        class="navbar-toggler"
+        className="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbarNav"
@@ -34,17 +34,17 @@ const NavigationBar = () => {
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon"></span>
+        <span className="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link">
+      <div className="collapse navbar-collapse" id="navbarNav">
+        <ul className="navbar-nav">
+          <li className="nav-item active">
+            <a className="nav-link">
               <Link to="/">Login</Link>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
+          <li className="nav-item">
+            <a className="nav-link" href="#">
               <Link to="/registration">Sign Up</Link>
             </a>
           </li>

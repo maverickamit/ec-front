@@ -1,6 +1,6 @@
 import { observable, action, decorate } from "mobx";
 
-class FeedsStore {
+class UserStore {
   user = [];
 
   setUser(user) {
@@ -8,9 +8,9 @@ class FeedsStore {
   }
 }
 
-FeedsStore = decorate(FeedsStore, {
+UserStore = decorate(UserStore, {
   user: observable,
   setUser: action,
 });
 
-export { FeedsStore };
+export { UserStore };

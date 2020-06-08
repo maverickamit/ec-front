@@ -1,13 +1,14 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { observer } from "mobx-react";
 
 const initialValues = {
   email: "",
   password: "",
 };
 
-const UserLogin = () => {
+const UserLogin = ({ userStore }) => {
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: Yup.object({
@@ -35,7 +36,8 @@ const UserLogin = () => {
           if (data === "unable to login") {
             alert("Unable to Login. Username and/or password are incorrect.");
           } else {
-            alert("Welcome back " + data.firstName);
+            userStore.setUser(data);
+            alert(userStore.user.user.firstName);
           }
         });
     },
@@ -56,7 +58,7 @@ const UserLogin = () => {
         />
       </div>
       {formik.touched.email && formik.errors.email ? (
-        <div class="alert alert-warning" role="alert">
+        <div className="alert alert-warning" role="alert">
           {formik.errors.email}
         </div>
       ) : null}
@@ -73,16 +75,16 @@ const UserLogin = () => {
         />
       </div>
       {formik.touched.password && formik.errors.password ? (
-        <div class="alert alert-warning" role="alert">
+        <div className="alert alert-warning" role="alert">
           {formik.errors.password}
         </div>
       ) : null}
       <br></br>
-      <button type="submit" class="btn btn-primary">
+      <button type="submit" className="btn btn-primary">
         Login
       </button>
     </form>
   );
 };
 
-export default UserLogin;
+export default observer(UserLogin);
