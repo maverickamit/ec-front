@@ -37,7 +37,7 @@ const UserProfile = ({ userStore }) => {
               <div className="col-sm-6 col-md-8">
                 <h4>{`${userStore.user.user.firstName} ${userStore.user.user.lastName}`}</h4>
 
-                <p>email@example.com</p>
+                <p>{userStore.user.user.email}</p>
                 <div>
                   <button type="button" className="btn btn-primary">
                     Link Bank Account
