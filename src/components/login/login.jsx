@@ -2,6 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { observer } from "mobx-react";
+import { Redirect } from "react-router-dom";
 
 const initialValues = {
   email: "",
@@ -42,6 +43,11 @@ const UserLogin = ({ userStore }) => {
         });
     },
   });
+  // const { redirect } = this.state;
+
+  if (userStore.user.user) {
+    return <Redirect to="/profile" />;
+  }
 
   return (
     <form onSubmit={formik.handleSubmit}>
