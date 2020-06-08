@@ -20,12 +20,14 @@ const UserProfile = ({ userStore }) => {
         <div className="col-xs-12 col-sm-6 col-md-6">
           <div className="well well-sm">
             <div className="row">
-              <div className="col-sm-6 col-md-4  ">
-                <img
-                  src="http://placehold.it/380x380"
-                  alt=""
-                  className="rounded-circle img-fluid"
-                />
+              <div className="col-sm-6 col-md-4 ">
+                <div className="d-flex justify-content-center">
+                  <img
+                    src="http://placehold.it/380x380"
+                    alt=""
+                    className="rounded-circle img-fluid "
+                  />
+                </div>
                 <br />
                 <br />
                 <div className="d-flex justify-content-center">

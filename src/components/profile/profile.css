@@ -1,0 +1,8 @@
+@media only screen and (max-width: 600px) {
+  .img-fluid {
+    max-width: 200px !important;
+  }
+  .btn {
+    margin-bottom: 30px;
+  }
+}
