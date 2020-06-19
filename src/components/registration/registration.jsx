@@ -79,7 +79,7 @@ const UserRegistration = ({ userStore }) => {
           } else {
             setAlert(
               data.user.firstName +
-                ", you are successfully registered. You can login now."
+                ", you are successfully registered. You can login now. Please verify your email within 24 hours."
             );
           }
         });
