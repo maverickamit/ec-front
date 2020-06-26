@@ -1,4 +1,5 @@
 import { observable, action, decorate } from "mobx";
+import { persist } from "mobx-persist";
 
 class UserStore {
   user = [];
@@ -13,8 +14,8 @@ class UserStore {
 }
 
 UserStore = decorate(UserStore, {
-  user: observable,
-  loggedIn: observable,
+  user: [persist("object"), observable],
+  loggedIn: [persist, observable],
   setUser: action,
   setLoggedIn: action,
 });

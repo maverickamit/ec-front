@@ -12,6 +12,11 @@ const initialValues = {
 const UserLogin = ({ userStore }) => {
   const [alert, setAlert] = useState("");
 
+  const firstRun = true;
+  if(firstRun){
+    
+  }
+
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: Yup.object({
@@ -19,7 +24,7 @@ const UserLogin = ({ userStore }) => {
       password: Yup.string().required("Required"),
     }),
     onSubmit: (values, { resetForm }) => {
-      fetch("https://everchange-backend.herokuapp.com/users/login", {
+      fetch("http://localhost:3000/users/login", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
