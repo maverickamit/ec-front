@@ -96,7 +96,11 @@ const UserLogin = ({ userStore }) => {
         </div>
       ) : null}
       <br></br>
-      <button type="submit" className="btn btn-primary">
+      <button
+        type="submit"
+        className="btn btn-primary"
+        onMouseDown={(e) => e.preventDefault()}
+      >
         Login
       </button>
       <br></br>

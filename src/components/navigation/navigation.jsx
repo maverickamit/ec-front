@@ -38,6 +38,7 @@ const NavigationBar = ({ userStore }) => {
                   type="submit"
                   className="btn btn-primary"
                   onClick={handleLogout}
+                  onMouseDown={(e) => e.preventDefault()}
                 >
                   Logout
                 </button>

@@ -65,7 +65,12 @@ const UserProfile = ({ userStore }) => {
                 <br />
                 <br />
                 <div className="d-flex justify-content-center">
-                  <button type="button" className="btn btn-primary">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onMouseDown={(e) => e.preventDefault()}
+                  >
+                    {" "}
                     Update Picture
                   </button>
                 </div>
@@ -93,13 +98,18 @@ const UserProfile = ({ userStore }) => {
                     className="btn btn-primary"
                     style={{ marginBottom: "15px" }}
                     onClick={handleResendButton}
+                    onMouseDown={(e) => e.preventDefault()}
                   >
                     Resend Verification Email
                   </button>
                 )}
 
                 <div>
-                  <button type="button" className="btn btn-primary">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onMouseDown={(e) => e.preventDefault()}
+                  >
                     Link Bank Account
                   </button>
                 </div>
