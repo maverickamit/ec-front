@@ -6,6 +6,15 @@ import { Redirect } from "react-router-dom";
 const UserProfile = ({ userStore }) => {
   var user = { firstName: "Please" };
   var user = userStore.user;
+  const handleResendButton = () => {
+    fetch("http://localhost:3000/users/authenticate", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userStore.token,
+      },
+    });
+  };
 
   if (!userStore.loggedIn) {
     return <Redirect to="/"></Redirect>;
@@ -83,6 +92,7 @@ const UserProfile = ({ userStore }) => {
                   <button
                     className="btn btn-primary"
                     style={{ marginBottom: "15px" }}
+                    onClick={handleResendButton}
                   >
                     Resend Verification Email
                   </button>
