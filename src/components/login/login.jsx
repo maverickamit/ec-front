@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { observer } from "mobx-react";
 import { Redirect } from "react-router-dom";
-import { prodUrl, devUrl } from "../urls";
+import { prodUrl, prodUrl } from "../urls";
 
 const initialValues = {
   email: "",
@@ -24,7 +24,7 @@ const UserLogin = ({ userStore }) => {
       password: Yup.string().required("Required"),
     }),
     onSubmit: (values, { resetForm }) => {
-      fetch(devUrl + "/users/login", {
+      fetch(prodUrl + "/users/login", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -2,11 +2,11 @@ import React from "react";
 import { observer } from "mobx-react";
 import "./profile.css";
 import { Redirect } from "react-router-dom";
-import { prodUrl, devUrl } from "../urls";
+import { prodUrl, prodUrl } from "../urls";
 
 const UserProfile = ({ userStore }) => {
   const handleResendButton = () => {
-    fetch(devUrl + "/users/authenticate", {
+    fetch(prodUrl + "/users/authenticate", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -21,7 +21,7 @@ const UserProfile = ({ userStore }) => {
   if (userStore.loggedIn & (userStore.user.firstName == null)) {
     console.log("fetching data again because of page refresh");
 
-    fetch(devUrl+"/users/me", {
+    fetch(prodUrl+"/users/me", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
