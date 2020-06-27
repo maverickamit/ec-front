@@ -2,12 +2,11 @@ import React from "react";
 import { observer } from "mobx-react";
 import "./profile.css";
 import { Redirect } from "react-router-dom";
+import { prodUrl, devUrl } from "../urls";
 
 const UserProfile = ({ userStore }) => {
-  var user = { firstName: "Please" };
-  var user = userStore.user;
   const handleResendButton = () => {
-    fetch("http://localhost:3000/users/authenticate", {
+    fetch(devUrl + "/users/authenticate", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -22,7 +21,7 @@ const UserProfile = ({ userStore }) => {
   if (userStore.loggedIn & (userStore.user.firstName == null)) {
     console.log("fetching data again because of page refresh");
 
-    fetch("http://localhost:3000/users/me", {
+    fetch(devUrl+"/users/me", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
