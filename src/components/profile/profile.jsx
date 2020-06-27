@@ -74,10 +74,20 @@ const UserProfile = ({ userStore }) => {
                     }`}
                   >{`${
                     userStore.user.emailVerified
-                      ? "(verified)"
-                      : "(not verified)"
+                      ? `(verified)`
+                      : `(not verified)`
                   }`}</span>
                 </p>
+
+                {userStore.user.emailVerified == false && (
+                  <button
+                    className="btn btn-primary"
+                    style={{ marginBottom: "15px" }}
+                  >
+                    Resend Verification Email
+                  </button>
+                )}
+
                 <div>
                   <button type="button" className="btn btn-primary">
                     Link Bank Account
