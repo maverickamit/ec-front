@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react";
 import "./profile.css";
 import { Redirect } from "react-router-dom";
-import { prodUrl, prodUrl } from "../urls";
+import { prodUrl, devUrl } from "../urls";
 
 const UserProfile = ({ userStore }) => {
   const handleResendButton = () => {
@@ -21,7 +21,7 @@ const UserProfile = ({ userStore }) => {
   if (userStore.loggedIn & (userStore.user.firstName == null)) {
     console.log("fetching data again because of page refresh");
 
-    fetch(prodUrl+"/users/me", {
+    fetch(prodUrl + "/users/me", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
