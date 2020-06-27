@@ -11,6 +11,7 @@ import React from "react";
 const NavigationBar = ({ userStore }) => {
   const handleLogout = () => {
     userStore.setLoggedIn(false);
+    userStore.setUser([]);
   };
   if (userStore.loggedIn) {
     return (

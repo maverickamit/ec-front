@@ -13,8 +13,7 @@ const UserLogin = ({ userStore }) => {
   const [alert, setAlert] = useState("");
 
   const firstRun = true;
-  if(firstRun){
-    
+  if (firstRun) {
   }
 
   const formik = useFormik({
@@ -47,10 +46,9 @@ const UserLogin = ({ userStore }) => {
             );
           } else {
             setAlert("");
-            userStore.setUser(data);
+            userStore.setUser(data.user);
+            userStore.setToken(data.token);
             userStore.setLoggedIn(true);
-
-            // alert(userStore.user.user.firstName);
           }
         });
     },
