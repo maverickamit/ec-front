@@ -105,7 +105,7 @@ const UserLogin = ({ userStore }) => {
 			<br />
 			{alert !== '' ? (
 				<div class="alert alert-danger" role="alert">
-					<p>{alert}</p>
+					{alert}
 				</div>
 			) : null}
 		</form>
