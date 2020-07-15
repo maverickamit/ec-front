@@ -198,11 +198,13 @@ const UserRegistration = ({ userStore }) => {
 				<div className="alert alert-danger" role="alert">
 					{alert}
 				</div>
-			) : (
+			) : null}
+
+			{alert !== 'Unable to Register. Email already in use.' && alert !== '' ? (
 				<div className="alert alert-success" role="alert">
 					{alert}
 				</div>
-			)}
+			) : null}
 		</form>
 	);
 };
