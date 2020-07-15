@@ -4,13 +4,14 @@ import { usePlaidLink } from 'react-plaid-link';
 const Link = () => {
 	const onSuccess = useCallback((token, metadata) => {
 		// send token to server
-		console.log(token);
+		console.log('Public Token: ' + token);
+		console.log('Customer-selected account ID: ' + metadata.account_id);
 	}, []);
 
 	const config = {
 		clientName: 'Your Link name',
 		env: 'sandbox',
-		product: [ 'auth', 'transactions' ],
+		product: [ 'auth' ],
 		publicKey: 'c920232687f1eaf83b9790d1f0fdc5',
 		onSuccess
 		// ...
