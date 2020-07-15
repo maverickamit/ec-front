@@ -103,9 +103,11 @@ const UserLogin = ({ userStore }) => {
 			</button>
 			<br />
 			<br />
-			<div class="alert alert-danger" role="alert">
-				<p>{alert}</p>
-			</div>
+			{alert !== '' ? (
+				<div class="alert alert-danger" role="alert">
+					<p>{alert}</p>
+				</div>
+			) : null}
 		</form>
 	);
 };
