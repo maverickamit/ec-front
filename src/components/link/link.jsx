@@ -12,7 +12,7 @@ const Link = () => {
 		})
 			.then((response) => {
 				if (response.status === 200) {
-					alert('successfully linked');
+					alert('Account successfully linked');
 				} else {
 					alert('Error in linking account');
 				}
