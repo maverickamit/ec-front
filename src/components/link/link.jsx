@@ -5,7 +5,7 @@ import { prodUrl, devUrl } from '../urls';
 const Link = () => {
 	const onSuccess = useCallback((token, metadata) => {
 		// send token to server
-		fetch(prodUrl + '/users/plaidverify', {
+		fetch(devUrl + '/users/plaidverify', {
 			method: 'post',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ PUBLIC_TOKEN: token, ACCOUNT_ID: metadata.account_id })

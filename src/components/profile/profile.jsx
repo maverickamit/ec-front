@@ -7,7 +7,7 @@ import Link from '../link/link';
 
 const UserProfile = ({ userStore }) => {
 	const handleResendButton = () => {
-		fetch(prodUrl + '/users/authenticate', {
+		fetch(devUrl + '/users/authenticate', {
 			method: 'post',
 			headers: {
 				'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ const UserProfile = ({ userStore }) => {
 	if (userStore.loggedIn & (userStore.user.firstName == null)) {
 		console.log('fetching data again because of page refresh');
 
-		fetch(prodUrl + '/users/me', {
+		fetch(devUrl + '/users/me', {
 			method: 'get',
 			headers: {
 				'Content-Type': 'application/json',

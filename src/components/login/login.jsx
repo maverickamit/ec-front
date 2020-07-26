@@ -24,7 +24,7 @@ const UserLogin = ({ userStore }) => {
 			password: Yup.string().required('Required')
 		}),
 		onSubmit: (values, { resetForm }) => {
-			fetch(prodUrl + '/users/login', {
+			fetch(devUrl + '/users/login', {
 				method: 'post',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
