@@ -1,9 +1,27 @@
 import React, { useCallback } from 'react';
 import { usePlaidLink } from 'react-plaid-link';
+import { prodUrl, devUrl } from '../urls';
 
 const Link = () => {
 	const onSuccess = useCallback((token, metadata) => {
 		// send token to server
+		fetch(prodUrl + '/users/plaidverify', {
+			method: 'post',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ PUBLIC_TOKEN: token, ACCOUNT_ID: metadata.account_id })
+		})
+			.then((response) => {
+				if (response.status === 200) {
+					alert('successfully linked');
+				} else {
+					alert('Error in linking account');
+				}
+			})
+			.catch((err) => {
+				alert('Error in linking account');
+				console.log(err);
+			});
+
 		console.log('Public Token: ' + token);
 		console.log('Customer-selected account ID: ' + metadata.account_id);
 	}, []);
