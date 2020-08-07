@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { observer } from 'mobx-react';
 import { Redirect } from 'react-router-dom';
 import { prodUrl, devUrl } from '../urls';
+import './login.css';
 
 const initialValues = {
 	email: '',
@@ -24,7 +25,7 @@ const UserLogin = ({ userStore }) => {
 			password: Yup.string().required('Required')
 		}),
 		onSubmit: (values, { resetForm }) => {
-			fetch(devUrl + '/users/login', {
+			fetch(prodUrl + '/users/login', {
 				method: 'post',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
@@ -62,53 +63,61 @@ const UserLogin = ({ userStore }) => {
 	}
 
 	return (
-		<form onSubmit={formik.handleSubmit}>
-			<div className="form-group">
-				<label htmlFor="email">Email Address</label>
-				<input
-					className="form-control"
-					id="email"
-					name="email"
-					type="email"
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.email}
-				/>
+		<div class="global-container">
+			<div class="card login-form">
+				<div class="card-body">
+					<h3 class="card-title text-center">Log in to EverChange</h3>
+					<div class="card-text" />
+					<form onSubmit={formik.handleSubmit}>
+						<div className="form-group">
+							<label htmlFor="email">Email Address</label>
+							<input
+								className="form-control"
+								id="email"
+								name="email"
+								type="email"
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+								value={formik.values.email}
+							/>
+						</div>
+						{formik.touched.email && formik.errors.email ? (
+							<div className="alert alert-warning" role="alert">
+								{formik.errors.email}
+							</div>
+						) : null}
+						<div className="form-group">
+							<label htmlFor="Password">Password</label>
+							<input
+								className="form-control"
+								id="password"
+								name="password"
+								type="password"
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+								value={formik.values.password}
+							/>
+						</div>
+						{formik.touched.password && formik.errors.password ? (
+							<div className="alert alert-warning" role="alert">
+								{formik.errors.password}
+							</div>
+						) : null}
+						<br />
+						<button type="submit" className="btn btn-primary" onMouseDown={(e) => e.preventDefault()}>
+							Login
+						</button>
+						<br />
+						<br />
+						{alert !== '' ? (
+							<div class="alert alert-danger" role="alert">
+								{alert}
+							</div>
+						) : null}
+					</form>
+				</div>
 			</div>
-			{formik.touched.email && formik.errors.email ? (
-				<div className="alert alert-warning" role="alert">
-					{formik.errors.email}
-				</div>
-			) : null}
-			<div className="form-group">
-				<label htmlFor="Password">Password</label>
-				<input
-					className="form-control"
-					id="password"
-					name="password"
-					type="password"
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.password}
-				/>
-			</div>
-			{formik.touched.password && formik.errors.password ? (
-				<div className="alert alert-warning" role="alert">
-					{formik.errors.password}
-				</div>
-			) : null}
-			<br />
-			<button type="submit" className="btn btn-primary" onMouseDown={(e) => e.preventDefault()}>
-				Login
-			</button>
-			<br />
-			<br />
-			{alert !== '' ? (
-				<div class="alert alert-danger" role="alert">
-					{alert}
-				</div>
-			) : null}
-		</form>
+		</div>
 	);
 };
 
