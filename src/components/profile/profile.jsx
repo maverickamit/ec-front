@@ -30,7 +30,7 @@ const UserProfile = ({ userStore }) => {
 			}
 		})
 			.then((response) => {
-				if (response.status == 200) {
+				if (response.status === 200) {
 					return response.json();
 				} else {
 					return 'unable to login';
@@ -38,6 +38,8 @@ const UserProfile = ({ userStore }) => {
 			})
 			.then((data) => {
 				if (data === 'unable to login') {
+					console.log('running');
+					userStore.setLoggedIn(false);
 					alert('Session Expired.Login again.');
 				} else {
 					userStore.setUser(data);
