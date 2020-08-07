@@ -83,129 +83,137 @@ const UserRegistration = ({ userStore }) => {
 	});
 
 	return (
-		<form onSubmit={formik.handleSubmit}>
-			<div className="form-group ">
-				<label htmlFor="firstName">First Name</label>
-				<input
-					className="form-control"
-					id="firstName"
-					name="firstName"
-					type="text"
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.firstName}
-				/>
-			</div>
-			{formik.touched.firstName && formik.errors.firstName ? (
-				<div className="alert alert-warning" role="alert">
-					{formik.errors.firstName}
-				</div>
-			) : null}
-			<div className="form-group">
-				<label htmlFor="lastName">Last Name</label>
-				<input
-					className="form-control "
-					id="lastName"
-					name="lastName"
-					type="text"
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.lastName}
-				/>
-			</div>
-			{formik.touched.lastName && formik.errors.lastName ? (
-				<div className="alert alert-warning" role="alert">
-					{formik.errors.lastName}
-				</div>
-			) : null}
-			<div className="form-group">
-				<label htmlFor="email">Email Address</label>
-				<input
-					className="form-control"
-					id="email"
-					name="email"
-					type="email"
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.email}
-				/>
-			</div>
-			{formik.touched.email && formik.errors.email ? (
-				<div className="alert alert-warning" role="alert">
-					{formik.errors.email}
-				</div>
-			) : null}
-			<div className="form-group">
-				<label htmlFor="Password">Password</label>
-				<input
-					className="form-control"
-					id="password"
-					name="password"
-					type="password"
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.password}
-				/>
-			</div>
-			{formik.touched.password && formik.errors.password ? (
-				<div className="alert alert-warning" role="alert">
-					{formik.errors.password}
-				</div>
-			) : null}
-			<div className="form-group">
-				<label htmlFor="confirmPassword">Confirm Password</label>
-				<input
-					className="form-control"
-					id="confirmPassword"
-					name="confirmPassword"
-					type="password"
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.confirmPassword}
-				/>
-			</div>
-			{formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-				<div className="alert alert-danger" role="alert">
-					{formik.errors.confirmPassword}
-				</div>
-			) : null}
+		<div class="global-container">
+			<div class="card login-form">
+				<div class="card-body">
+					<h3 class="card-title text-center">Sign Up with EverChange</h3>
+					<div class="card-text" />
+					<form onSubmit={formik.handleSubmit}>
+						<div className="form-group ">
+							<label htmlFor="firstName">First Name</label>
+							<input
+								className="form-control"
+								id="firstName"
+								name="firstName"
+								type="text"
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+								value={formik.values.firstName}
+							/>
+						</div>
+						{formik.touched.firstName && formik.errors.firstName ? (
+							<div className="alert alert-warning" role="alert">
+								{formik.errors.firstName}
+							</div>
+						) : null}
+						<div className="form-group">
+							<label htmlFor="lastName">Last Name</label>
+							<input
+								className="form-control "
+								id="lastName"
+								name="lastName"
+								type="text"
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+								value={formik.values.lastName}
+							/>
+						</div>
+						{formik.touched.lastName && formik.errors.lastName ? (
+							<div className="alert alert-warning" role="alert">
+								{formik.errors.lastName}
+							</div>
+						) : null}
+						<div className="form-group">
+							<label htmlFor="email">Email Address</label>
+							<input
+								className="form-control"
+								id="email"
+								name="email"
+								type="email"
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+								value={formik.values.email}
+							/>
+						</div>
+						{formik.touched.email && formik.errors.email ? (
+							<div className="alert alert-warning" role="alert">
+								{formik.errors.email}
+							</div>
+						) : null}
+						<div className="form-group">
+							<label htmlFor="Password">Password</label>
+							<input
+								className="form-control"
+								id="password"
+								name="password"
+								type="password"
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+								value={formik.values.password}
+							/>
+						</div>
+						{formik.touched.password && formik.errors.password ? (
+							<div className="alert alert-warning" role="alert">
+								{formik.errors.password}
+							</div>
+						) : null}
+						<div className="form-group">
+							<label htmlFor="confirmPassword">Confirm Password</label>
+							<input
+								className="form-control"
+								id="confirmPassword"
+								name="confirmPassword"
+								type="password"
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+								value={formik.values.confirmPassword}
+							/>
+						</div>
+						{formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+							<div className="alert alert-danger" role="alert">
+								{formik.errors.confirmPassword}
+							</div>
+						) : null}
 
-			<div>
-				<input
-					id="agreeToTerms"
-					name="agreeToTerms"
-					type="checkbox"
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.agreeToTerms}
-				/>{' '}
-				I have read and agree to the Terms and Conditions and Privacy Policy
+						<div>
+							<input
+								id="agreeToTerms"
+								name="agreeToTerms"
+								type="checkbox"
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+								value={formik.values.agreeToTerms}
+							/>{' '}
+							I have read and agree to the Terms and Conditions and Privacy Policy
+						</div>
+
+						{formik.touched.agreeToTerms && formik.errors.agreeToTerms ? (
+							<div className="alert alert-info" role="alert">
+								{formik.errors.agreeToTerms}
+							</div>
+						) : null}
+						<br />
+						<button type="submit" className="btn btn-primary">
+							Submit
+						</button>
+						<br />
+						<br />
+
+						{alert == 'Unable to Register. Email already in use.' ? (
+							<div className="alert alert-danger" role="alert">
+								{alert}
+							</div>
+						) : null}
+
+						{alert !== 'Unable to Register. Email already in use.' && alert !== '' ? (
+							<div className="alert alert-success" role="alert">
+								{alert}
+							</div>
+						) : null}
+					</form>
+				</div>
 			</div>
-
-			{formik.touched.agreeToTerms && formik.errors.agreeToTerms ? (
-				<div className="alert alert-info" role="alert">
-					{formik.errors.agreeToTerms}
-				</div>
-			) : null}
-			<br />
-			<button type="submit" className="btn btn-primary">
-				Submit
-			</button>
-			<br />
-			<br />
-
-			{alert == 'Unable to Register. Email already in use.' ? (
-				<div className="alert alert-danger" role="alert">
-					{alert}
-				</div>
-			) : null}
-
-			{alert !== 'Unable to Register. Email already in use.' && alert !== '' ? (
-				<div className="alert alert-success" role="alert">
-					{alert}
-				</div>
-			) : null}
-		</form>
+		</div>
 	);
 };
 
