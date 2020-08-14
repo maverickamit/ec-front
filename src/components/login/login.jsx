@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { observer } from "mobx-react";
 import { Redirect } from "react-router-dom";
-import { prodUrl, devUrl } from "../urls";
+import { prodUrl } from "../urls";
 import "./login.css";
 
 const initialValues = {
