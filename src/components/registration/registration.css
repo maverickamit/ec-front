@@ -35,3 +35,7 @@ form {
 .alert {
   font-size: 13px;
 }
+
+.alert-info {
+  margin-top: 10px;
+}
