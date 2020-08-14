@@ -35,6 +35,7 @@ const UserLogin = ({ userStore }) => {
         }),
       })
         .then((response) => {
+          userStore.setIsLoading(false);
           if (response.status == 200) {
             resetForm(initialValues);
             return response.json();
