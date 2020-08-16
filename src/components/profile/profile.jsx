@@ -59,7 +59,7 @@ const UserProfile = ({ userStore }) => {
               <div className="col-sm-6 col-md-4 ">
                 <div className="d-flex justify-content-center">
                   <img
-                    src="http://placehold.it/380x380"
+                    src={`http://localhost:3000/users/${userStore.user._id}/avatar`}
                     alt=""
                     className="rounded-circle img-fluid "
                   />
