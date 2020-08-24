@@ -44,15 +44,23 @@ const Link = ({ userStore }) => {
 
   const { open, ready, error } = usePlaidLink(config);
 
-  return (
-    <button
-      type="button"
-      className="btn btn-primary"
-      onClick={() => open()}
-      disabled={!ready}
-    >
-      Connect a bank account
-    </button>
-  );
+  if (userStore.user.bankLinked) {
+    return (
+      <button type="button" className="btn btn-success">
+        Bank Account Connected
+      </button>
+    );
+  } else {
+    return (
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={() => open()}
+        disabled={!ready}
+      >
+        Connect a bank account
+      </button>
+    );
+  }
 };
 export default observer(Link);

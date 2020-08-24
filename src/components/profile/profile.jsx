@@ -4,8 +4,11 @@ import "./profile.css";
 import { Redirect } from "react-router-dom";
 import { prodUrl } from "../urls";
 import Link from "../link/link";
+import { useState } from "react";
 
 const UserProfile = ({ userStore }) => {
+  const [emailReset, setEmailReset] = useState(false);
+
   const handleResendButton = () => {
     fetch(prodUrl + "/users/authenticate", {
       method: "post",
@@ -13,6 +16,12 @@ const UserProfile = ({ userStore }) => {
         "Content-Type": "application/json",
         Authorization: "Bearer " + userStore.token,
       },
+    }).then((response) => {
+      if (response.status === 200) {
+        setEmailReset(true);
+      } else {
+        console.log("success not");
+      }
     });
   };
 
@@ -95,7 +104,7 @@ const UserProfile = ({ userStore }) => {
                   }`}</span>
                 </p>
 
-                {userStore.user.emailVerified == false && (
+                {userStore.user.emailVerified == false && emailReset == false && (
                   <button
                     className="btn btn-primary"
                     style={{ marginBottom: "15px" }}
@@ -103,6 +112,18 @@ const UserProfile = ({ userStore }) => {
                     onMouseDown={(e) => e.preventDefault()}
                   >
                     Resend Verification Email
+                  </button>
+                )}
+                {userStore.user.emailVerified == false && emailReset == true && (
+                  <button
+                    className="btn btn-success"
+                    style={{ marginBottom: "15px" }}
+                    onClick={setTimeout(() => {
+                      setEmailReset(false);
+                    }, 3000)}
+                    onMouseDown={(e) => e.preventDefault()}
+                  >
+                    Verification Email Sent!
                   </button>
                 )}
 
