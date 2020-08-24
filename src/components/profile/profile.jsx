@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import { prodUrl } from "../urls";
 import Link from "../link/link";
 import { useState } from "react";
+import fetchUser from "../modules/fetchUser";
 
 const UserProfile = ({ userStore }) => {
   const [emailReset, setEmailReset] = useState(false);
@@ -20,7 +21,7 @@ const UserProfile = ({ userStore }) => {
       if (response.status === 200) {
         setEmailReset(true);
       } else {
-        console.log("success not");
+        console.log("not successful");
       }
     });
   };
@@ -31,30 +32,7 @@ const UserProfile = ({ userStore }) => {
   if (userStore.loggedIn & (userStore.user.firstName == null)) {
     console.log("fetching data again because of page refresh");
 
-    fetch(prodUrl + "/users/me", {
-      method: "get",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + userStore.token,
-      },
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        } else {
-          return "unable to login";
-        }
-      })
-      .then((data) => {
-        if (data === "unable to login") {
-          console.log("running");
-          userStore.setLoggedIn(false);
-          alert("Session Expired.Login again.");
-        } else {
-          userStore.setUser(data);
-          console.log(userStore.user.firstName);
-        }
-      });
+    fetchUser({ userStore });
   }
   if (!userStore.user.firstName) {
     return <p>Please wait</p>;
