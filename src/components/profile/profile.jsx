@@ -107,7 +107,7 @@ const UserProfile = ({ userStore }) => {
                 )}
 
                 <div>
-                  <Link />
+                  <Link userStore={userStore} />
                 </div>
               </div>
             </div>

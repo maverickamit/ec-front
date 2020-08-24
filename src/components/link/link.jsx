@@ -1,13 +1,17 @@
 import React, { useCallback } from "react";
+import { observer } from "mobx-react";
 import { usePlaidLink } from "react-plaid-link";
 import { prodUrl } from "../urls";
 
-const Link = () => {
+const Link = ({ userStore }) => {
   const onSuccess = useCallback((token, metadata) => {
     // send token to server
-    fetch(prodUrl + "/users/plaidverify", {
+    fetch(prodUrl + "/users/banking/plaidverify", {
       method: "post",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userStore.token,
+      },
       body: JSON.stringify({
         PUBLIC_TOKEN: token,
         ACCOUNT_ID: metadata.account_id,
@@ -51,4 +55,4 @@ const Link = () => {
     </button>
   );
 };
-export default Link;
+export default observer(Link);
