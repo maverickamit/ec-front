@@ -31,7 +31,6 @@ const UserProfile = ({ userStore }) => {
   }
   if (userStore.loggedIn & (userStore.user.firstName == null)) {
     console.log("fetching data again because of page refresh");
-
     fetchUser({ userStore });
   }
   if (!userStore.user.firstName) {

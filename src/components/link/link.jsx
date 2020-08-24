@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { observer } from "mobx-react";
 import { usePlaidLink } from "react-plaid-link";
 import { prodUrl } from "../urls";
+import fetchUser from "../modules/fetchUser";
 
 const Link = ({ userStore }) => {
   const onSuccess = useCallback((token, metadata) => {
@@ -19,6 +20,7 @@ const Link = ({ userStore }) => {
     })
       .then((response) => {
         if (response.status === 200) {
+          fetchUser({ userStore });
           alert("Account successfully linked");
         } else {
           alert("Error in linking account");
