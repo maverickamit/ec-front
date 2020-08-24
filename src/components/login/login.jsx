@@ -67,11 +67,11 @@ const UserLogin = ({ userStore }) => {
   }
 
   return (
-    <div class="global-container">
-      <div class="card login-form">
-        <div class="card-body">
-          <h3 class="card-title text-center">Log in to EverChange</h3>
-          <div class="card-text" />
+    <div className="global-container">
+      <div className="card login-form">
+        <div className="card-body">
+          <h3 className="card-title text-center">Log in to EverChange</h3>
+          <div className="card-text" />
           <form onSubmit={formik.handleSubmit}>
             <div className="form-group">
               <label htmlFor="email">Email Address</label>
@@ -117,7 +117,7 @@ const UserLogin = ({ userStore }) => {
               >
                 Loading..
                 <span
-                  class="spinner-grow spinner-grow-sm"
+                  className="spinner-grow spinner-grow-sm"
                   role="status"
                   aria-hidden="true"
                 ></span>
@@ -134,7 +134,7 @@ const UserLogin = ({ userStore }) => {
             <br />
             <br />
             {alert !== "" ? (
-              <div class="alert alert-danger" role="alert">
+              <div className="alert alert-danger" role="alert">
                 {alert}
               </div>
             ) : null}

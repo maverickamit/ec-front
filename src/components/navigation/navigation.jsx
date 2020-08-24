@@ -16,9 +16,9 @@ const NavigationBar = ({ userStore }) => {
   if (userStore.loggedIn) {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="#">
+        <p className="navbar-brand" href="#">
           <Link to="/"> EverChange</Link>
-        </a>
+        </p>
         <button
           className="navbar-toggler"
           type="button"
@@ -64,9 +64,9 @@ const NavigationBar = ({ userStore }) => {
     //   );
 
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="#">
+      <p className="navbar-brand" href="#">
         <Link to="/"> EverChange</Link>
-      </a>
+      </p>
       <button
         className="navbar-toggler"
         type="button"
@@ -81,14 +81,14 @@ const NavigationBar = ({ userStore }) => {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item active">
-            <a className="nav-link">
+            <p className="nav-link">
               <Link to="/">Login</Link>
-            </a>
+            </p>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <p className="nav-link" href="#">
               <Link to="/registration">Sign Up</Link>
-            </a>
+            </p>
           </li>
         </ul>
       </div>
