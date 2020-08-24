@@ -6,8 +6,28 @@ import { prodUrl } from "../urls";
 import Link from "../link/link";
 import { useState } from "react";
 import fetchUser from "../modules/fetchUser";
+import Uppy from "@uppy/core";
+import XHRUpload from "@uppy/xhr-upload";
+import { DragDrop } from "@uppy/react";
 
 const UserProfile = ({ userStore }) => {
+  const uppy = new Uppy({
+    autoProceed: true,
+  });
+
+  uppy.use(XHRUpload, {
+    endpoint: prodUrl + "/users/me/avatar",
+    headers: {
+      Authorization: "Bearer " + userStore.token,
+    },
+    fieldName: "avatar",
+    formData: true,
+  });
+
+  uppy.on("upload-success", (file, response) => {
+    console.log("uploaded");
+    window.location.reload();
+  });
   const [emailReset, setEmailReset] = useState(false);
 
   const handleResendButton = () => {
@@ -53,14 +73,15 @@ const UserProfile = ({ userStore }) => {
                 <br />
                 <br />
                 <div className="d-flex justify-content-center">
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onMouseDown={(e) => e.preventDefault()}
-                  >
-                    {" "}
-                    Update Picture
-                  </button>
+                  <DragDrop
+                    uppy={uppy}
+                    locale={{
+                      strings: {
+                        dropHereOr: "Update Avatar",
+                        browse: "browse",
+                      },
+                    }}
+                  />
                 </div>
               </div>
               <div className="col-sm-6 col-md-8">
