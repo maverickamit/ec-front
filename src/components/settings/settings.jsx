@@ -4,7 +4,6 @@ import "./settings.css";
 import { prodUrl } from "../urls";
 import { useState } from "react";
 import fetchUser from "../modules/fetchUser";
-import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
