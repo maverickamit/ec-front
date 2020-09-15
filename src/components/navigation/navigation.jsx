@@ -33,6 +33,16 @@ const NavigationBar = ({ userStore }) => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item active">
+              <p className="nav-link">
+                <Link to="/profile">Dashboard</Link>
+              </p>
+            </li>
+            <li className="nav-item active">
+              <p className="nav-link">
+                <Link to="/settings">Settings</Link>
+              </p>
+            </li>
+            <li className="nav-item active">
               <a className="nav-link">
                 <button
                   type="submit"
@@ -51,17 +61,17 @@ const NavigationBar = ({ userStore }) => {
   }
 
   return (
-    //     <nav className="navbar navbar-expand-sm bg-light">
-    //       <ul className="navbar-nav">
-    //         <li className="nav-item">
-    //           <Link to="/">Login</Link>
-    //         </li>
-    //         <li className="nav-item">
-    //           <Link to="/registration">Sign Up</Link>
-    //         </li>
-    //       </ul>
-    //     </nav>
-    //   );
+    //   <nav className="navbar navbar-expand-sm bg-light">
+    //     <ul className="navbar-nav">
+    //       <li className="nav-item">
+    //         <Link to="/">Login</Link>
+    //       </li>
+    //       <li className="nav-item">
+    //         <Link to="/registration">Sign Up</Link>
+    //       </li>
+    //     </ul>
+    //   </nav>
+    // );
 
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <p className="navbar-brand" href="#">

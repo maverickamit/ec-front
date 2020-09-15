@@ -1,3 +1,6 @@
 nav {
   margin-bottom: 20px;
 }
+p.nav-link {
+  margin-top: 6px;
+}
