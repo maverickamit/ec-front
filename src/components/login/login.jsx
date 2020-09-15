@@ -112,7 +112,6 @@ const UserLogin = ({ userStore }) => {
               <button
                 type="submit"
                 className="btn btn-primary"
-                disabled
                 onMouseDown={(e) => e.preventDefault()}
               >
                 Loading..

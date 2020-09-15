@@ -9,7 +9,6 @@ import fetchUser from "../modules/fetchUser";
 import Uppy from "@uppy/core";
 import XHRUpload from "@uppy/xhr-upload";
 import { DragDrop } from "@uppy/react";
-
 const UserProfile = ({ userStore }) => {
   const uppy = new Uppy({
     autoProceed: true,
