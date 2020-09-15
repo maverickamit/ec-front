@@ -7,8 +7,8 @@ import fetchUser from "../modules/fetchUser";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const settingsPage = ({ userStore }) => {
+const SettingsPage = ({ userStore }) => {
   return <h1>Settings Page</h1>;
 };
 
-export default observer(settingsPage);
+export default observer(SettingsPage);
