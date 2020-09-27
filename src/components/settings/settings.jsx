@@ -28,6 +28,25 @@ const SettingsPage = ({ userStore }) => {
       newPassword: Yup.string(),
       billingAddress: Yup.string(),
     }),
+    onSubmit: (values, { resetForm }) => {
+      fetch(prodUrl + "/users/me", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + userStore.token,
+        },
+        body: JSON.stringify({
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          password: values.newPassword,
+          oldPassword: values.currentPassword,
+          billingAddress: values.billingAddress,
+        }),
+      }).then((response) => {
+        console.log(response);
+      });
+    },
   });
 
   return (
