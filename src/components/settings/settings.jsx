@@ -16,7 +16,7 @@ const initialValues = {
   newPassword: "",
 };
 const SettingsPage = ({ userStore }) => {
-  const [alert, setAlert] = useState("");
+  // const [alert, setAlert] = useState("");
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -45,6 +45,11 @@ const SettingsPage = ({ userStore }) => {
         }),
       }).then((response) => {
         console.log(response);
+        if (response.status == 200) {
+          alert("successful update");
+        } else {
+          alert("unsuccessful update");
+        }
       });
     },
   });
