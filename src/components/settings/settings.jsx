@@ -8,7 +8,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const initialValues = {
-  name: "",
+  firstName: "",
+  lastName: "",
   billingAddress: "",
   email: "",
   currentPassword: "",
@@ -20,10 +21,12 @@ const SettingsPage = ({ userStore }) => {
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: Yup.object({
-      name: Yup.string(),
+      firstName: Yup.string(),
+      lastName: Yup.string(),
       email: Yup.string().email("Invalid email address"),
       currentPassword: Yup.string().required("Required"),
       newPassword: Yup.string(),
+      billingAddress: Yup.string(),
     }),
   });
 
@@ -35,20 +38,37 @@ const SettingsPage = ({ userStore }) => {
           <div className="card-text" />
           <form onSubmit={formik.handleSubmit}>
             <div className="form-group">
-              <label htmlFor="name">Name</label>
+              <label htmlFor="name">First Name</label>
               <input
                 className="form-control"
-                id="name"
-                name="name"
+                id="firstName"
+                name="firstName"
                 type="text"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.name}
+                value={formik.values.firstName}
               />
             </div>
-            {formik.touched.name && formik.errors.name ? (
+            {formik.touched.firstName && formik.errors.firstName ? (
               <div className="alert alert-warning" role="alert">
-                {formik.errors.name}
+                {formik.errors.firstName}
+              </div>
+            ) : null}
+            <div className="form-group">
+              <label htmlFor="name">Last Name</label>
+              <input
+                className="form-control"
+                id="lastName"
+                name="lastName"
+                type="text"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.lastName}
+              />
+            </div>
+            {formik.touched.lastName && formik.errors.lastName ? (
+              <div className="alert alert-warning" role="alert">
+                {formik.errors.lastName}
               </div>
             ) : null}
             <div className="form-group">
