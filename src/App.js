@@ -5,6 +5,7 @@ import UserLogin from "./components/login/login";
 import UserProfile from "./components/profile/profile";
 import NavigationBar from "./components/navigation/navigation";
 import SettingsPage from "./components/settings/settings";
+import ForgotPassword from "./components/forgotPassword/forgotPassword";
 import { Route } from "react-router-dom";
 import { observer } from "mobx-react";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -38,6 +39,13 @@ function App({ userStore }) {
           exact
           component={(props) => (
             <SettingsPage {...props} userStore={userStore} />
+          )}
+        />
+        <Route
+          path="/forgot-password"
+          exact
+          component={(props) => (
+            <ForgotPassword {...props} userStore={userStore} />
           )}
         />
       </div>

@@ -10,7 +10,7 @@ import "./forgotPassword.css";
 const ForgotPassword = ({ userStore }) => {
         
     return (
-        <h2>Forgot ForgotPassword</h2>
+        <h2>ForgotPassword</h2>
     )
 
 };
