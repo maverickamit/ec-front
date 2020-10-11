@@ -47,7 +47,7 @@ const SettingsPage = ({ userStore }) => {
       }).then((response) => {
         console.log(response);
         if (response.status == 200) {
-          setAlertMessage("Successful Update");
+          setAlertMessage("Successful Update.");
           resetErrors();
         } else {
           setAlertMessage("Unsuccessful update. Please use correct password.");
@@ -176,7 +176,7 @@ const SettingsPage = ({ userStore }) => {
             )}
             <br />
             <br />
-            {alertMessage === "Successful Update" ? (
+            {alertMessage === "Successful Update." ? (
               <div className="alert alert-success" role="alert">
                 {alertMessage}
               </div>
