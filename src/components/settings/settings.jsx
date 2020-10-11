@@ -10,7 +10,6 @@ import * as Yup from "yup";
 const initialValues = {
   firstName: "",
   lastName: "",
-  billingAddress: "",
   email: "",
   currentPassword: "",
   newPassword: "",
@@ -25,8 +24,7 @@ const SettingsPage = ({ userStore }) => {
       lastName: Yup.string(),
       email: Yup.string().email("Invalid email address"),
       currentPassword: Yup.string().required("Required"),
-      newPassword: Yup.string(),
-      billingAddress: Yup.string(),
+      newPassword: Yup.string()
     }),
     onSubmit: (values, { resetForm }) => {
       fetch(prodUrl + "/users/me", {
@@ -41,7 +39,6 @@ const SettingsPage = ({ userStore }) => {
           email: values.email,
           password: values.newPassword,
           oldPassword: values.currentPassword,
-          billingAddress: values.billingAddress,
         }),
       }).then((response) => {
         console.log(response);
@@ -93,23 +90,6 @@ const SettingsPage = ({ userStore }) => {
             {formik.touched.lastName && formik.errors.lastName ? (
               <div className="alert alert-warning" role="alert">
                 {formik.errors.lastName}
-              </div>
-            ) : null}
-            <div className="form-group">
-              <label htmlFor="billingAddress">Billing Address</label>
-              <textarea
-                className="form-control"
-                id="billingAddress"
-                name="billingAddress"
-                type="text"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.billingAddress}
-              />
-            </div>
-            {formik.touched.billingAddress && formik.errors.billingAddress ? (
-              <div className="alert alert-warning" role="alert">
-                {formik.errors.billingAddress}
               </div>
             ) : null}
             <div className="form-group">
