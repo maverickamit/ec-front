@@ -15,7 +15,11 @@ const initialValues = {
   newPassword: "",
 };
 const SettingsPage = ({ userStore }) => {
-  // const [alert, setAlert] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
+
+  const resetErrors = () => {
+    setTimeout(() => setAlertMessage(""), 3000);
+  };
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -43,13 +47,17 @@ const SettingsPage = ({ userStore }) => {
       }).then((response) => {
         console.log(response);
         if (response.status == 200) {
-          alert("successful update");
+          setAlertMessage("Successful Update");
+          resetErrors();
         } else {
-          alert("unsuccessful update");
+          setAlertMessage("Unsuccessful update. Please use correct password.");
+          resetErrors();
         }
       });
     },
   });
+
+ 
 
   return (
     <div className="global-container">
@@ -168,11 +176,16 @@ const SettingsPage = ({ userStore }) => {
             )}
             <br />
             <br />
-            {alert !== "" ? (
+            {alertMessage === "Successful Update" ? (
+              <div className="alert alert-success" role="alert">
+                {alertMessage}
+              </div>
+            ) : alertMessage !== "" ? (
               <div className="alert alert-danger" role="alert">
-                {alert}
+                {alertMessage}
               </div>
             ) : null}
+            
           </form>
         </div>
       </div>
