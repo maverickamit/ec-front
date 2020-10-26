@@ -132,12 +132,12 @@ const UserLogin = ({ userStore }) => {
                 Login
               </button>
             )}
-            <button
+            <div
             id="forgotPasswordbtn"
                 className="btn btn-primary"
               >
                 <Link to="/forgot-password">Forgot Password?</Link>
-              </button>
+              </div>
             <br />
             <br />
             {alert !== "" ? (
