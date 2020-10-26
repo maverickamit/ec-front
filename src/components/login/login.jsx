@@ -109,7 +109,14 @@ const UserLogin = ({ userStore }) => {
               </div>
             ) : null}
             <br />
-            {userStore.isLoading ? (
+            
+            <div
+            id="forgotPasswordbtn"
+                className="btn btn-primary"
+              >
+                <Link to="/forgot-password">Forgot Password?</Link>
+              </div>
+              {userStore.isLoading ? (
               <button
                 type="submit"
                 className="btn btn-primary"
@@ -132,12 +139,6 @@ const UserLogin = ({ userStore }) => {
                 Login
               </button>
             )}
-            <div
-            id="forgotPasswordbtn"
-                className="btn btn-primary"
-              >
-                <Link to="/forgot-password">Forgot Password?</Link>
-              </div>
             <br />
             <br />
             {alert !== "" ? (
