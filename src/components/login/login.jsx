@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { observer } from "mobx-react";
 import { Redirect } from "react-router-dom";
@@ -124,12 +125,19 @@ const UserLogin = ({ userStore }) => {
             ) : (
               <button
                 type="submit"
+                id='loginbtn'
                 className="btn btn-primary"
                 onMouseDown={(e) => e.preventDefault()}
               >
                 Login
               </button>
             )}
+            <button
+            id="forgotPasswordbtn"
+                className="btn btn-primary"
+              >
+                <Link to="/forgot-password">Forgot Password?</Link>
+              </button>
             <br />
             <br />
             {alert !== "" ? (

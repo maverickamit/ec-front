@@ -35,3 +35,17 @@ form {
 .alert {
   font-size: 13px;
 }
+
+#loginbtn {
+  margin-right: 20px;
+}
+
+@media only screen and (min-width: 360px) {
+  #forgotPasswordbtn {
+    float: right;
+  }
+}
+
+#forgotPasswordbtn a {
+  color: white;
+}
