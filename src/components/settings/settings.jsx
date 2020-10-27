@@ -1,5 +1,6 @@
 import React from "react";
 import { observer } from "mobx-react";
+import { Redirect } from "react-router-dom";
 import "./settings.css";
 import { prodUrl } from "../urls";
 import { useState } from "react";
@@ -57,7 +58,9 @@ const SettingsPage = ({ userStore }) => {
     },
   });
 
- 
+  if (!userStore.loggedIn) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div className="global-container">
