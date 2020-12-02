@@ -35,8 +35,27 @@ const Link = ({ userStore }) => {
       console.log("Public Token: " + token);
       console.log("Customer-selected account ID: " + metadata.account_id);
     } else {
+      fetch(prodUrl + "/users/banking/plaidupdate", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + userStore.token,
+        },
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            fetchUser({ userStore });
+            alert("Account successfully updated");
+          } else {
+            alert("Error in updating account");
+          }
+        })
+        .catch((err) => {
+          alert("Error in updating account");
+          console.log(err);
+        });
+
       console.log("Public Token: " + token);
-      console.log("metadata: " + metadata);
       console.log("successful update");
     }
   }, []);
