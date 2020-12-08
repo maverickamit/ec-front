@@ -11,21 +11,26 @@ const DataTable = ({ userStore }) => {
       width: 200,
     },
     {
-      title: "Amount",
+      title: "Amount($)",
       dataIndex: "amount",
       key: "amount",
       width: 200,
     },
   ];
 
-  const data = [
-    { date: "10-12-2020", amount: 3.7, key: "1" },
-    { date: "10-12-2020", amount: 36, key: "2" },
-  ];
+  var data = [];
+
+  userStore.user.amountsCharged.map((item) => {
+    data.push({
+      date: new Date(item.dateCharged).toLocaleDateString("en-US"),
+      amount: item.amount / 100,
+    });
+  });
   return (
     <div>
       <Table columns={columns} data={data} />
     </div>
   );
 };
+
 export default observer(DataTable);
