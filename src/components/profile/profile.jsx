@@ -72,8 +72,7 @@ const UserProfile = ({ userStore }) => {
                   />
                 </div>
                 <br />
-                <br />
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center btn">
                   <DragDrop
                     uppy={uppy}
                     locale={{
