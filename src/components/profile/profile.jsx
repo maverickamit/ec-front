@@ -4,11 +4,13 @@ import "./profile.css";
 import { Redirect } from "react-router-dom";
 import { prodUrl } from "../urls";
 import Link from "../link/link";
+import DataTable from "./table";
 import { useState } from "react";
 import fetchUser from "../modules/fetchUser";
 import Uppy from "@uppy/core";
 import XHRUpload from "@uppy/xhr-upload";
 import { DragDrop } from "@uppy/react";
+
 const UserProfile = ({ userStore }) => {
   const uppy = new Uppy({
     autoProceed: true,
@@ -126,6 +128,9 @@ const UserProfile = ({ userStore }) => {
 
                 <div>
                   <Link userStore={userStore} />
+                  <br />
+                  <br />
+                  <DataTable userStore={userStore} />
                 </div>
               </div>
             </div>
