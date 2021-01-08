@@ -8,13 +8,13 @@ const DataTable = ({ userStore }) => {
       title: "Date",
       dataIndex: "date",
       key: "date",
-      width: 200,
+      width: 150,
     },
     {
       title: "Amount($)",
       dataIndex: "amount",
       key: "amount",
-      width: 200,
+      width: 100,
     },
   ];
 
@@ -28,7 +28,7 @@ const DataTable = ({ userStore }) => {
   });
   return (
     <div>
-      <Table columns={columns} data={data} scroll={{ y: 200 }} />
+      <Table columns={columns} data={data} scroll={{ y: 100 }} />
     </div>
   );
 };
