@@ -7,6 +7,7 @@ import { useState } from "react";
 import fetchUser from "../modules/fetchUser";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import Switch from "react-switch";
 
 const initialValues = {
   firstName: "",
@@ -29,7 +30,7 @@ const SettingsPage = ({ userStore }) => {
       lastName: Yup.string(),
       email: Yup.string().email("Invalid email address"),
       currentPassword: Yup.string().required("Required"),
-      newPassword: Yup.string()
+      newPassword: Yup.string(),
     }),
     onSubmit: (values, { resetForm }) => {
       fetch(prodUrl + "/users/me", {
@@ -50,6 +51,7 @@ const SettingsPage = ({ userStore }) => {
         if (response.status == 200) {
           setAlertMessage("Successful Update.");
           resetErrors();
+          fetchUser({ userStore });
         } else {
           setAlertMessage("Unsuccessful update. Please use correct password.");
           resetErrors();
@@ -57,6 +59,19 @@ const SettingsPage = ({ userStore }) => {
       });
     },
   });
+
+  const [checked, setChecked] = useState(userStore.user.bankLinked);
+  const handleAccountLinkButton = async () => {
+    setChecked(!checked);
+    const resp = await fetch(prodUrl + "/users/banking/plaiddelete", {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userStore.token,
+      },
+    });
+    fetchUser({ userStore });
+  };
 
   if (!userStore.loggedIn) {
     return <Redirect to="/" />;
@@ -188,8 +203,13 @@ const SettingsPage = ({ userStore }) => {
                 {alertMessage}
               </div>
             ) : null}
-            
           </form>
+          {checked ? (
+            <p>Toggle Button to Disable Linked Bank Account</p>
+          ) : (
+            <p>Toggle Button to Enable Linked Bank Account</p>
+          )}
+          <Switch onChange={handleAccountLinkButton} checked={checked} />
         </div>
       </div>
     </div>
