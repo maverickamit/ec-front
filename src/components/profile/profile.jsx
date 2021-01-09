@@ -136,6 +136,7 @@ const UserProfile = ({ userStore }) => {
           </div>
         </div>
       </div>
+      <br></br>
     </div>
   );
 };
