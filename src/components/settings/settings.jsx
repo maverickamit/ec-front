@@ -9,14 +9,14 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Switch from "react-switch";
 
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  currentPassword: "",
-  newPassword: "",
-};
 const SettingsPage = ({ userStore }) => {
+  const initialValues = {
+    firstName: userStore.user.firstName,
+    lastName: userStore.user.lastName,
+    email: userStore.user.email,
+    currentPassword: "",
+    newPassword: "",
+  };
   const [alertMessage, setAlertMessage] = useState("");
 
   const resetErrors = () => {
