@@ -61,8 +61,11 @@ const SettingsPage = ({ userStore }) => {
   });
 
   const [checked, setChecked] = useState(userStore.user.bankLinked);
+  const [toogleAlertMessage, setToogleAlertMessage] = useState("");
+  const resetToogleErrors = () => {
+    setTimeout(() => setToogleAlertMessage(""), 1500);
+  };
   const handleAccountLinkButton = async () => {
-    setChecked(!checked);
     const resp = await fetch(prodUrl + "/users/banking/plaiddelete", {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       headers: {
@@ -70,6 +73,15 @@ const SettingsPage = ({ userStore }) => {
         Authorization: "Bearer " + userStore.token,
       },
     });
+    if (resp.status == 400) {
+      setToogleAlertMessage("Please verify bank account first.");
+    } else if (resp.status == 500) {
+      setToogleAlertMessage("Error. Please try again after some time.");
+    } else {
+      setChecked(!checked);
+      setToogleAlertMessage("Success!");
+    }
+    resetToogleErrors();
     fetchUser({ userStore });
   };
 
@@ -210,6 +222,15 @@ const SettingsPage = ({ userStore }) => {
             <p>Toggle Button to Enable Linked Bank Account</p>
           )}
           <Switch onChange={handleAccountLinkButton} checked={checked} />
+          {toogleAlertMessage === "Success!" ? (
+            <div className="alert alert-success" role="alert">
+              {toogleAlertMessage}
+            </div>
+          ) : toogleAlertMessage !== "" ? (
+            <div className="alert alert-danger" role="alert">
+              {toogleAlertMessage}
+            </div>
+          ) : null}
         </div>
       </div>
     </div>
