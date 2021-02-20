@@ -60,7 +60,7 @@ const Link = ({ userStore }) => {
     }
   }, []);
 
-  if (userStore.user.linkUpdateToken == "") {
+  if (!userStore.user.linkUpdateToken) {
     var config = {
       clientName: "Your Link name",
       env: "sandbox",
