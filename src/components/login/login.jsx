@@ -109,17 +109,13 @@ const UserLogin = ({ userStore }) => {
               </div>
             ) : null}
             <br />
-            
-            <div
-            id="forgotPasswordbtn"
-                className="btn btn-primary"
-              >
-                <Link to="/forgot-password">Forgot Password?</Link>
-              </div>
-              {userStore.isLoading ? (
+            <div id="forgotPasswordbtn" className="btn">
+              <Link to="/forgot-password">Forgot Password?</Link>
+            </div>
+            {userStore.isLoading ? (
               <button
                 type="submit"
-                id='loginbtn'
+                id="loginbtn"
                 className="btn btn-primary"
                 onMouseDown={(e) => e.preventDefault()}
               >
@@ -133,7 +129,7 @@ const UserLogin = ({ userStore }) => {
             ) : (
               <button
                 type="submit"
-                id='loginbtn'
+                id="loginbtn"
                 className="btn btn-primary"
                 onMouseDown={(e) => e.preventDefault()}
               >

@@ -36,8 +36,8 @@ form {
   font-size: 13px;
 }
 
-#forgetPasswordbtn {
-  margin-right: 20px;
+#forgotPasswordbtn {
+  padding: 0 !important;
 }
 
 @media only screen and (min-width: 360px) {
@@ -47,6 +47,9 @@ form {
 }
 
 #forgotPasswordbtn a {
-  color: white;
   text-decoration: none;
+}
+
+#forgotPasswordbtn a:hover {
+  text-decoration: underline;
 }
