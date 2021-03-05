@@ -20,10 +20,11 @@ const DataTable = ({ userStore }) => {
 
   var data = [];
 
-  userStore.user.amountsCharged.map((item) => {
+  userStore.user.amountsCharged.map((item, index) => {
     data.push({
       date: new Date(item.dateCharged).toLocaleDateString("en-US"),
       amount: item.amount / 100,
+      key: index,
     });
   });
   return (
