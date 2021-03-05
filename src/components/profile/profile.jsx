@@ -25,10 +25,15 @@ const UserProfile = ({ userStore }) => {
     formData: true,
   });
 
+  uppy.on("upload-error", (file, error, response) => {
+    alert(`Please choose an image file of size below 1 MB`);
+  });
+
   uppy.on("upload-success", (file, response) => {
     console.log("uploaded");
     window.location.reload();
   });
+
   const [emailReset, setEmailReset] = useState(false);
 
   const handleResendButton = () => {
