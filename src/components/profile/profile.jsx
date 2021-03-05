@@ -9,29 +9,9 @@ import fetchUser from "../modules/fetchUser";
 import Uppy from "@uppy/core";
 import XHRUpload from "@uppy/xhr-upload";
 import { DragDrop } from "@uppy/react";
-import Modal from "react-modal";
+import NotificationModal from "../modal/notification";
 
 const UserProfile = ({ userStore }) => {
-  const customStyles = {
-    content: {
-      top: "20%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-    },
-  };
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
   const uppy = new Uppy({
     autoProceed: true,
   });
@@ -46,8 +26,8 @@ const UserProfile = ({ userStore }) => {
   });
 
   uppy.on("upload-error", (file, error, response) => {
-    setErrorMessage("Please choose an image file of size below 1 MB");
-    openModal();
+    userStore.setNotification("Please choose an image file of size below 1 MB");
+    userStore.setIsNotification(true);
   });
 
   uppy.on("upload-success", (file, response) => {
@@ -90,21 +70,7 @@ const UserProfile = ({ userStore }) => {
           <div className="well well-sm">
             <div className="row">
               <div>
-                <Modal
-                  isOpen={modalIsOpen}
-                  onRequestClose={closeModal}
-                  style={customStyles}
-                  contentLabel="Example Modal"
-                  ariaHideApp={false}
-                >
-                  <button
-                    className="btn btn-primary float-right"
-                    onClick={closeModal}
-                  >
-                    x
-                  </button>
-                  <div>{errorMessage}</div>
-                </Modal>
+                <NotificationModal userStore={userStore} />
               </div>
               <div className="col-sm-6 col-md-4 ">
                 <div className="d-flex justify-content-center">
