@@ -20,7 +20,6 @@ const NotificationModal = ({ userStore }) => {
   return (
     <Modal
       isOpen={userStore.isNotification}
-      onRequestClose={closeModal}
       style={customStyles}
       contentLabel="Example Modal"
       ariaHideApp={false}

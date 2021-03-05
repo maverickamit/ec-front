@@ -22,13 +22,24 @@ const Link = ({ userStore }) => {
         .then((response) => {
           if (response.status === 200) {
             fetchUser({ userStore });
-            alert("Account successfully linked");
+            // alert("Account successfully linked");
+            userStore.setNotification("Account is successfully linked");
+            userStore.setIsNotification(true);
           } else {
-            alert("Error in linking account");
+            // alert("Error in linking account");
+            userStore.setNotification(
+              "There has been an error in linking account"
+            );
+            userStore.setIsNotification(true);
           }
         })
         .catch((err) => {
-          alert("Error in linking account");
+          // alert("Error in linking account");
+          userStore.setNotification(
+            "There has been an error in linking account"
+          );
+          userStore.setIsNotification(true);
+
           console.log(err);
         });
 
@@ -45,13 +56,23 @@ const Link = ({ userStore }) => {
         .then((response) => {
           if (response.status === 200) {
             fetchUser({ userStore });
-            alert("Account successfully updated");
+            // alert("Account successfully updated");
+            userStore.setNotification("Account is successfully updated");
+            userStore.setIsNotification(true);
           } else {
-            alert("Error in updating account");
+            userStore.setNotification(
+              "There has been an error in updating account"
+            );
+            userStore.setIsNotification(true);
+            // alert("Error in updating account");
           }
         })
         .catch((err) => {
-          alert("Error in updating account");
+          // alert("Error in updating account");
+          userStore.setNotification(
+            "There has been an error in updating account"
+          );
+          userStore.setIsNotification(true);
           console.log(err);
         });
 

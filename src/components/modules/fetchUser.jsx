@@ -19,7 +19,9 @@ const fetchUser = ({ userStore }) => {
       if (data === "unable to login") {
         console.log("running");
         userStore.setLoggedIn(false);
-        alert("Session Expired.Login again.");
+        userStore.setNotification("Session is expired.Please login again.");
+        userStore.setIsNotification(true);
+        // alert("Session Expired.Login again.");
       } else {
         userStore.setUser(data);
         console.log(userStore.user.firstName);
