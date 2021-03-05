@@ -29,7 +29,8 @@ const DataTable = ({ userStore }) => {
   });
   return (
     <div>
-      <Table columns={columns} data={data} scroll={{ y: 100 }} />
+      <h6>Details of amounts charged </h6>
+      <Table columns={columns} data={data} />
     </div>
   );
 };

@@ -37,3 +37,14 @@
   outline: none !important;
   box-shadow: none !important;
 }
+.rc-table {
+  height: 300px;
+  overflow-y: auto;
+}
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+  width: 250px;
+}
