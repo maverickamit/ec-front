@@ -67,7 +67,7 @@ const SettingsPage = ({ userStore }) => {
   };
   const handleAccountLinkButton = async () => {
     const resp = await fetch(prodUrl + "/users/banking/plaiddelete", {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + userStore.token,

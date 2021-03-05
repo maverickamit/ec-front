@@ -21,7 +21,6 @@ const fetchUser = ({ userStore }) => {
         userStore.setLoggedIn(false);
         userStore.setNotification("Session is expired.Please login again.");
         userStore.setIsNotification(true);
-        // alert("Session Expired.Login again.");
       } else {
         userStore.setUser(data);
         console.log(userStore.user.firstName);

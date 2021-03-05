@@ -22,11 +22,9 @@ const Link = ({ userStore }) => {
         .then((response) => {
           if (response.status === 200) {
             fetchUser({ userStore });
-            // alert("Account successfully linked");
             userStore.setNotification("Account is successfully linked");
             userStore.setIsNotification(true);
           } else {
-            // alert("Error in linking account");
             userStore.setNotification(
               "There has been an error in linking account"
             );
@@ -34,7 +32,6 @@ const Link = ({ userStore }) => {
           }
         })
         .catch((err) => {
-          // alert("Error in linking account");
           userStore.setNotification(
             "There has been an error in linking account"
           );
@@ -56,7 +53,6 @@ const Link = ({ userStore }) => {
         .then((response) => {
           if (response.status === 200) {
             fetchUser({ userStore });
-            // alert("Account successfully updated");
             userStore.setNotification("Account is successfully updated");
             userStore.setIsNotification(true);
           } else {
@@ -64,11 +60,9 @@ const Link = ({ userStore }) => {
               "There has been an error in updating account"
             );
             userStore.setIsNotification(true);
-            // alert("Error in updating account");
           }
         })
         .catch((err) => {
-          // alert("Error in updating account");
           userStore.setNotification(
             "There has been an error in updating account"
           );
@@ -88,7 +82,6 @@ const Link = ({ userStore }) => {
       product: ["auth"],
       publicKey: "c920232687f1eaf83b9790d1f0fdc5",
       onSuccess,
-      // ...
     };
   } else {
     var config = {

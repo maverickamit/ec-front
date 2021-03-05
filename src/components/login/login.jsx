@@ -61,7 +61,6 @@ const UserLogin = ({ userStore }) => {
   const resetErrors = (setErrors) => {
     setTimeout(() => setErrors({}), 3000);
   };
-  // const { redirect } = this.state;
 
   if (userStore.loggedIn) {
     return <Redirect to="/profile" />;

@@ -1,6 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import Navbar from "react-bootstrap/Navbar";
-// import Nav from "react-bootstrap/Nav";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
@@ -61,18 +58,6 @@ const NavigationBar = ({ userStore }) => {
   }
 
   return (
-    //   <nav className="navbar navbar-expand-sm bg-light">
-    //     <ul className="navbar-nav">
-    //       <li className="nav-item">
-    //         <Link to="/">Login</Link>
-    //       </li>
-    //       <li className="nav-item">
-    //         <Link to="/registration">Sign Up</Link>
-    //       </li>
-    //     </ul>
-    //   </nav>
-    // );
-
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <p className="navbar-brand" href="#">
         <Link to="/"> EverChange</Link>
