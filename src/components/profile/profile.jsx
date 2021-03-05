@@ -1,17 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { observer } from "mobx-react";
 import "./profile.css";
 import { Redirect } from "react-router-dom";
 import { prodUrl } from "../urls";
 import Link from "../link/link";
 import DataTable from "./table";
-import { useState } from "react";
 import fetchUser from "../modules/fetchUser";
 import Uppy from "@uppy/core";
 import XHRUpload from "@uppy/xhr-upload";
 import { DragDrop } from "@uppy/react";
+import Modal from "react-modal";
 
 const UserProfile = ({ userStore }) => {
+  const customStyles = {
+    content: {
+      top: "20%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+    },
+  };
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
   const uppy = new Uppy({
     autoProceed: true,
   });
@@ -26,7 +46,8 @@ const UserProfile = ({ userStore }) => {
   });
 
   uppy.on("upload-error", (file, error, response) => {
-    alert(`Please choose an image file of size below 1 MB`);
+    setErrorMessage("Please choose an image file of size below 1 MB");
+    openModal();
   });
 
   uppy.on("upload-success", (file, response) => {
@@ -68,6 +89,23 @@ const UserProfile = ({ userStore }) => {
         <div className="col-xs-12 col-sm-6 col-md-6">
           <div className="well well-sm">
             <div className="row">
+              <div>
+                <Modal
+                  isOpen={modalIsOpen}
+                  onRequestClose={closeModal}
+                  style={customStyles}
+                  contentLabel="Example Modal"
+                  ariaHideApp={false}
+                >
+                  <button
+                    className="btn btn-primary float-right"
+                    onClick={closeModal}
+                  >
+                    x
+                  </button>
+                  <div>{errorMessage}</div>
+                </Modal>
+              </div>
               <div className="col-sm-6 col-md-4 ">
                 <div className="d-flex justify-content-center">
                   <img
