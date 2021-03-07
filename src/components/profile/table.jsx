@@ -1,5 +1,5 @@
 import Table from "rc-table";
-import React, { useCallback } from "react";
+import React from "react";
 import { observer } from "mobx-react";
 
 const DataTable = ({ userStore }) => {

@@ -48,7 +48,7 @@ const SettingsPage = ({ userStore }) => {
         }),
       }).then((response) => {
         console.log(response);
-        if (response.status == 200) {
+        if (response.status === 200) {
           setAlertMessage("Successful Update.");
           resetErrors();
           fetchUser({ userStore });
@@ -73,9 +73,9 @@ const SettingsPage = ({ userStore }) => {
         Authorization: "Bearer " + userStore.token,
       },
     });
-    if (resp.status == 400) {
+    if (resp.status === 400) {
       setToogleAlertMessage("Please verify bank account first.");
-    } else if (resp.status == 500) {
+    } else if (resp.status === 500) {
       setToogleAlertMessage("Error. Please try again after some time.");
     } else {
       setChecked(!checked);

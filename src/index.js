@@ -11,7 +11,7 @@ import { create } from "mobx-persist";
 const userStore = new UserStore();
 const hydrate = create({});
 
-hydrate("ecAppState", userStore).then(() => console.log("ecAppState hydrated"));
+hydrate("ecAppState", userStore);
 
 ReactDOM.render(
   <React.StrictMode>

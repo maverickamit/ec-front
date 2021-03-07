@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
@@ -37,7 +37,7 @@ const UserLogin = ({ userStore }) => {
       })
         .then((response) => {
           userStore.setIsLoading(false);
-          if (response.status == 200) {
+          if (response.status === 200) {
             resetForm(initialValues);
             return response.json();
           } else {

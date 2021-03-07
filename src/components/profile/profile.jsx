@@ -56,7 +56,7 @@ const UserProfile = ({ userStore }) => {
   if (!userStore.loggedIn) {
     return <Redirect to="/" />;
   }
-  if (userStore.loggedIn & (userStore.user.firstName == null)) {
+  if (userStore.loggedIn & (userStore.user.firstName === null)) {
     console.log("fetching data again because of page refresh");
     fetchUser({ userStore });
   }
@@ -111,17 +111,18 @@ const UserProfile = ({ userStore }) => {
                   }`}</span>
                 </p>
 
-                {userStore.user.emailVerified == false && emailReset == false && (
-                  <button
-                    className="btn btn-primary"
-                    style={{ marginBottom: "15px" }}
-                    onClick={handleResendButton}
-                    onMouseDown={(e) => e.preventDefault()}
-                  >
-                    Resend Verification Email
-                  </button>
-                )}
-                {userStore.user.emailVerified == false && emailReset == true && (
+                {userStore.user.emailVerified === false &&
+                  emailReset === false && (
+                    <button
+                      className="btn btn-primary"
+                      style={{ marginBottom: "15px" }}
+                      onClick={handleResendButton}
+                      onMouseDown={(e) => e.preventDefault()}
+                    >
+                      Resend Verification Email
+                    </button>
+                  )}
+                {userStore.user.emailVerified === false && emailReset === true && (
                   <button
                     className="btn btn-success"
                     style={{ marginBottom: "15px" }}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { observer } from "mobx-react";
@@ -17,7 +17,7 @@ const UserRegistration = ({ userStore }) => {
   };
 
   function uncheck() {
-    if (document.getElementById("agreeToTerms").checked == true) {
+    if (document.getElementById("agreeToTerms").checked === true) {
       document.getElementById("agreeToTerms").checked = false;
     }
   }
@@ -70,7 +70,7 @@ const UserRegistration = ({ userStore }) => {
         .then((response) => {
           userStore.setIsLoading(false);
 
-          if (response.status == 201) {
+          if (response.status === 201) {
             resetForm(initialValues);
             uncheck();
             return response.json();
@@ -229,7 +229,7 @@ const UserRegistration = ({ userStore }) => {
             <br />
             <br />
 
-            {alert == "Unable to Register. Email already in use." ? (
+            {alert === "Unable to Register. Email already in use." ? (
               <div className="alert alert-danger" role="alert">
                 {alert}
               </div>

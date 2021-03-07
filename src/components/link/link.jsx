@@ -92,7 +92,7 @@ const Link = ({ userStore }) => {
   const { open, ready, error } = usePlaidLink(config);
 
   if (userStore.user.bankLinked) {
-    if (userStore.user.linkUpdateToken != "") {
+    if (userStore.user.linkUpdateToken !== "") {
       return (
         <button
           type="button"

@@ -1,6 +1,4 @@
-import { BrowserRouter as Router } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Redirect } from "react-router-dom";
 import { observer } from "mobx-react";
 import "./navigation.css";
 import React from "react";

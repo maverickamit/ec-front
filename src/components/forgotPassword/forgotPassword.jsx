@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { observer } from "mobx-react";
-import { Redirect } from "react-router-dom";
 import { prodUrl } from "../urls";
 import "./forgotPassword.css";
 
@@ -29,7 +28,7 @@ const ForgotPassword = ({ userStore }) => {
       })
         .then((response) => {
           userStore.setIsLoading(false);
-          if (response.status == 200) {
+          if (response.status === 200) {
             resetForm(initialValues);
             return "successful";
           } else {
@@ -94,12 +93,13 @@ const ForgotPassword = ({ userStore }) => {
             )}
             <br />
             <br />
-            {alert == "Please check your email for the password reset link." ? (
+            {alert ===
+            "Please check your email for the password reset link." ? (
               <div className="alert alert-success" role="alert">
                 {alert}
               </div>
             ) : null}
-            {alert == "Something went wrong. Please recheck your email." ? (
+            {alert === "Something went wrong. Please recheck your email." ? (
               <div className="alert alert-danger" role="alert">
                 {alert}
               </div>
