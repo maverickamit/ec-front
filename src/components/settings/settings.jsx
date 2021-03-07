@@ -47,7 +47,6 @@ const SettingsPage = ({ userStore }) => {
           oldPassword: values.currentPassword,
         }),
       }).then((response) => {
-        console.log(response);
         if (response.status === 200) {
           setAlertMessage("Successful Update.");
           resetErrors();

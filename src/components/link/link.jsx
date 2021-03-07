@@ -36,12 +36,8 @@ const Link = ({ userStore }) => {
             "There has been an error in linking account"
           );
           userStore.setIsNotification(true);
-
           console.log(err);
         });
-
-      console.log("Public Token: " + token);
-      console.log("Customer-selected account ID: " + metadata.account_id);
     } else {
       fetch(prodUrl + "/users/banking/plaidupdate", {
         method: "post",
@@ -69,9 +65,6 @@ const Link = ({ userStore }) => {
           userStore.setIsNotification(true);
           console.log(err);
         });
-
-      console.log("Public Token: " + token);
-      console.log("successful update");
     }
   }, []);
 

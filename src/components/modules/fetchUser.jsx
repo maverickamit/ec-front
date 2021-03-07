@@ -17,13 +17,11 @@ const fetchUser = ({ userStore }) => {
     })
     .then((data) => {
       if (data === "unable to login") {
-        console.log("running");
         userStore.setLoggedIn(false);
         userStore.setNotification("Session is expired.Please login again.");
         userStore.setIsNotification(true);
       } else {
         userStore.setUser(data);
-        console.log(userStore.user.firstName);
       }
     });
 };

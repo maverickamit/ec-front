@@ -31,7 +31,6 @@ const UserProfile = ({ userStore }) => {
   });
 
   uppy.on("upload-success", (file, response) => {
-    console.log("uploaded");
     window.location.reload();
   });
 
@@ -52,16 +51,15 @@ const UserProfile = ({ userStore }) => {
       }
     });
   };
-
   if (!userStore.loggedIn) {
     return <Redirect to="/" />;
   }
-  if (userStore.loggedIn & (userStore.user.firstName === null)) {
+  if (userStore.loggedIn & (userStore.user.firstName == null)) {
     console.log("fetching data again because of page refresh");
     fetchUser({ userStore });
   }
   if (!userStore.user.firstName) {
-    return <p>Please wait</p>;
+    return <p>Loading.... Please wait.</p>;
   }
   return (
     <div className="container">
