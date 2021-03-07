@@ -96,11 +96,11 @@ const Link = ({ userStore }) => {
       return (
         <button
           type="button"
-          className="btn btn-primary"
+          className="btn btn-warning"
           onClick={() => open()}
           disabled={!ready}
         >
-          Reverify bank account
+          Reverify bank account!
         </button>
       );
     }
