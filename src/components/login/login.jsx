@@ -6,7 +6,7 @@ import { observer } from "mobx-react";
 import { Redirect } from "react-router-dom";
 import { prodUrl } from "../urls";
 import "./login.css";
-
+import NotificationModal from "../modal/notification";
 const initialValues = {
   email: "",
   password: "",
@@ -70,6 +70,8 @@ const UserLogin = ({ userStore }) => {
     <div className="global-container">
       <div className="card login-form">
         <div className="card-body">
+          <NotificationModal userStore={userStore} />
+
           <h3 className="card-title text-center">Log in to EverChange</h3>
           <div className="card-text" />
           <form onSubmit={formik.handleSubmit}>
