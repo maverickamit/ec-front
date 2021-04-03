@@ -7,6 +7,7 @@ import fetchUser from "../modules/fetchUser";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Switch from "react-switch";
+import NotificationModal from "../modal/notification";
 import "./settings.css";
 import styles from "./settings.module.css";
 
@@ -23,7 +24,24 @@ const SettingsPage = ({ userStore }) => {
   const resetErrors = () => {
     setTimeout(() => setAlertMessage(""), 3000);
   };
-
+  const handleLogoutAllDevices = () => {
+    fetch(prodUrl + "/users/logoutAll", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userStore.token,
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        userStore.setNotification(
+          "You have successfully logged out from all sessions."
+        );
+      } else {
+        userStore.setNotification("There has been an error.");
+      }
+      userStore.setIsNotification(true);
+    });
+  };
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: Yup.object({
@@ -91,6 +109,7 @@ const SettingsPage = ({ userStore }) => {
 
   return (
     <div className="global-container">
+      <NotificationModal userStore={userStore} />
       <div className={"card " + styles.settingsCard}>
         <div className="card-body">
           <h3 className="card-title text-center">Update Details</h3>
@@ -207,7 +226,10 @@ const SettingsPage = ({ userStore }) => {
             <br />
             <br />
             {alertMessage === "Successful Update." ? (
-              <div className="alert alert-success" role="alert">
+              <div
+                className={"alert alert-success " + styles.toogleAlert}
+                role="alert"
+              >
                 {alertMessage}
               </div>
             ) : alertMessage !== "" ? (
@@ -216,22 +238,30 @@ const SettingsPage = ({ userStore }) => {
               </div>
             ) : null}
           </form>
-          {checked ? (
-            <p>Toggle Button to Disable Linked Bank Account</p>
-          ) : (
-            <p>Toggle Button to Enable Linked Bank Account</p>
-          )}
-          <Switch onChange={handleAccountLinkButton} checked={checked} />
-          {toogleAlertMessage === "Success!" ? (
-            <div className="alert alert-success" role="alert">
-              {toogleAlertMessage}
-            </div>
-          ) : toogleAlertMessage !== "" ? (
-            <div className="alert alert-danger" role="alert">
-              {toogleAlertMessage}
-            </div>
-          ) : null}
-          <br></br>
+          <div>
+            {checked ? (
+              <p>Toggle Button to Disable Linked Bank Account</p>
+            ) : (
+              <p>Toggle Button to Enable Linked Bank Account</p>
+            )}
+            <Switch onChange={handleAccountLinkButton} checked={checked} />
+            {toogleAlertMessage === "Success!" ? (
+              <div className="alert alert-success" role="alert">
+                {toogleAlertMessage}
+              </div>
+            ) : toogleAlertMessage !== "" ? (
+              <div className="alert alert-danger" role="alert">
+                {toogleAlertMessage}
+              </div>
+            ) : null}
+          </div>
+          <button
+            className={"btn btn-primary " + styles.logoutAllBtn}
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={handleLogoutAllDevices}
+          >
+            Log out from all sessions
+          </button>
         </div>
       </div>
     </div>
