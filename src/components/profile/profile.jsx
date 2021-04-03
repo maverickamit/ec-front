@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
-import "./profile.css";
 import { Redirect } from "react-router-dom";
 import { prodUrl } from "../urls";
 import Link from "../link/link";
@@ -10,6 +9,8 @@ import Uppy from "@uppy/core";
 import XHRUpload from "@uppy/xhr-upload";
 import { DragDrop } from "@uppy/react";
 import NotificationModal from "../modal/notification";
+import "./profile.css";
+import styles from "./profile.module.css";
 
 const UserProfile = ({ userStore }) => {
   const uppy = new Uppy({
@@ -75,11 +76,16 @@ const UserProfile = ({ userStore }) => {
                   <img
                     src={`${prodUrl}/users/${userStore.user._id}/avatar`}
                     alt=""
-                    className="rounded-circle img-fluid "
+                    className={"rounded-circle img-fluid " + styles.avatar}
                   />
                 </div>
                 <br />
-                <div className="d-flex justify-content-center btn">
+                <div
+                  className={
+                    "d-flex justify-content-center btn " +
+                    styles.updateAvatarBtn
+                  }
+                >
                   <DragDrop
                     uppy={uppy}
                     locale={{

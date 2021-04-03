@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { observer } from "mobx-react";
 import { prodUrl } from "../urls";
 import "./registration.css";
+import styles from "./registration.module.css";
 
 const UserRegistration = ({ userStore }) => {
   const [alert, setAlert] = useState("");
@@ -93,11 +94,11 @@ const UserRegistration = ({ userStore }) => {
 
   return (
     <div class="global-container">
-      <div class="card login-form">
+      <div className={"card " + styles.signupCard}>
         <div class="card-body">
           <h3 class="card-title text-center">Sign Up with EverChange</h3>
           <div class="card-text" />
-          <form onSubmit={formik.handleSubmit}>
+          <form className={styles.inputForm} onSubmit={formik.handleSubmit}>
             <div className="form-group ">
               <label htmlFor="firstName">First Name</label>
               <input

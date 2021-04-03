@@ -1,7 +1,8 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { observer } from "mobx-react";
 import "./navigation.css";
-import React from "react";
+import styles from "./navigation.module.css";
 
 const NavigationBar = ({ userStore }) => {
   const handleLogout = () => {

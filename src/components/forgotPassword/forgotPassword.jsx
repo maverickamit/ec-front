@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { observer } from "mobx-react";
 import { prodUrl } from "../urls";
 import "./forgotPassword.css";
+import styles from "./forgotPassword.module.css";
 
 const initialValues = {
   email: "",

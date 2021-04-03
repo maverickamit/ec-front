@@ -1,0 +1,26 @@
+.inputForm {
+  padding-top: 10px;
+  font-size: 14px;
+  margin-top: 30px;
+}
+
+.loginCard {
+  width: 420px;
+  margin: 20px;
+}
+.forgotPasswordbtn {
+  padding: 0 !important;
+}
+@media only screen and (min-width: 360px) {
+  .loginbtn {
+    float: right;
+  }
+}
+
+.forgotPasswordbtn a {
+  text-decoration: none;
+}
+
+.forgotPasswordbtn a:hover {
+  text-decoration: underline;
+}

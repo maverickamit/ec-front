@@ -1,13 +1,14 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { Redirect } from "react-router-dom";
-import "./settings.css";
 import { prodUrl } from "../urls";
 import { useState } from "react";
 import fetchUser from "../modules/fetchUser";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Switch from "react-switch";
+import "./settings.css";
+import styles from "./settings.module.css";
 
 const SettingsPage = ({ userStore }) => {
   const initialValues = {
@@ -90,11 +91,11 @@ const SettingsPage = ({ userStore }) => {
 
   return (
     <div className="global-container">
-      <div className="card login-form">
+      <div className={"card " + styles.settingsCard}>
         <div className="card-body">
           <h3 className="card-title text-center">Update Details</h3>
           <div className="card-text" />
-          <form onSubmit={formik.handleSubmit}>
+          <form className={styles.inputForm} onSubmit={formik.handleSubmit}>
             <div className="form-group">
               <label htmlFor="name">First Name</label>
               <input
@@ -230,6 +231,7 @@ const SettingsPage = ({ userStore }) => {
               {toogleAlertMessage}
             </div>
           ) : null}
+          <br></br>
         </div>
       </div>
     </div>

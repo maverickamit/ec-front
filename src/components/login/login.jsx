@@ -6,6 +6,8 @@ import { observer } from "mobx-react";
 import { Redirect } from "react-router-dom";
 import { prodUrl } from "../urls";
 import "./login.css";
+import styles from "./login.module.css";
+
 import NotificationModal from "../modal/notification";
 const initialValues = {
   email: "",
@@ -68,13 +70,13 @@ const UserLogin = ({ userStore }) => {
 
   return (
     <div className="global-container">
-      <div className="card login-form">
+      <div className={"card " + styles.loginCard}>
         <div className="card-body">
           <NotificationModal userStore={userStore} />
 
           <h3 className="card-title text-center">Log in to EverChange</h3>
           <div className="card-text" />
-          <form onSubmit={formik.handleSubmit}>
+          <form className={styles.inputForm} onSubmit={formik.handleSubmit}>
             <div className="form-group">
               <label htmlFor="email">Email Address</label>
               <input
@@ -110,7 +112,7 @@ const UserLogin = ({ userStore }) => {
               </div>
             ) : null}
             <br />
-            <div id="forgotPasswordbtn" className="btn">
+            <div className={styles.forgotPasswordbtn + " btn"}>
               <Link to="/forgot-password">Forgot Password?</Link>
             </div>
             {userStore.isLoading ? (
@@ -130,8 +132,7 @@ const UserLogin = ({ userStore }) => {
             ) : (
               <button
                 type="submit"
-                id="loginbtn"
-                className="btn btn-primary"
+                className={"btn btn-primary " + styles.loginbtn}
                 onMouseDown={(e) => e.preventDefault()}
               >
                 Login
