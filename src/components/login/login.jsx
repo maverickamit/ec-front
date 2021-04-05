@@ -119,7 +119,7 @@ const UserLogin = ({ userStore }) => {
               <button
                 type="submit"
                 id="loginbtn"
-                className="btn btn-primary"
+                className={"btn btn-primary " + styles.loginbtn}
                 onMouseDown={(e) => e.preventDefault()}
               >
                 Loading..
