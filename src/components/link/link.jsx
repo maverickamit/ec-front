@@ -68,6 +68,19 @@ const Link = ({ userStore }) => {
     }
   }, []);
 
+  const onExit = useCallback((err, metadata) => {
+    if (err != null && err.error_code === "INVALID_LINK_TOKEN") {
+      fetch(prodUrl + "/users/banking/create_link_token", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + userStore.token,
+        },
+      }).then(() => {
+        fetchUser({ userStore });
+      });
+    }
+  });
   if (!userStore.user.linkUpdateToken || !userStore.user.bankLinked) {
     var config = {
       clientName: "Your Link name",
@@ -80,6 +93,7 @@ const Link = ({ userStore }) => {
     var config = {
       token: userStore.user.linkUpdateToken,
       onSuccess,
+      onExit,
     };
   }
   const { open, ready, error } = usePlaidLink(config);
