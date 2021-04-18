@@ -68,7 +68,7 @@ const Link = ({ userStore }) => {
     }
   }, []);
 
-  if (!userStore.user.linkUpdateToken) {
+  if (!userStore.user.linkUpdateToken || !userStore.user.bankLinked) {
     var config = {
       clientName: "Your Link name",
       env: "sandbox",
