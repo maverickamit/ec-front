@@ -11,7 +11,7 @@ import { DragDrop } from "@uppy/react";
 import NotificationModal from "../modal/notification";
 import "./profile.css";
 import styles from "./profile.module.css";
-
+import Sidebar from "../sidebar/sidebar";
 const UserProfile = ({ userStore }) => {
   const uppy = new Uppy({
     autoProceed: true,
@@ -63,8 +63,9 @@ const UserProfile = ({ userStore }) => {
     return <p>Loading.... Please wait.</p>;
   }
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row">
+        <Sidebar />
         <div className="col-xs-12 col-sm-6 col-md-6">
           <div className="well well-sm">
             <div className="row">

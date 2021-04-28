@@ -14,7 +14,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 function App({ userStore }) {
   return (
     <Router>
-      <div className="container">
+      <div>
         <NavigationBar userStore={userStore} />
         <Switch>
           <Route
