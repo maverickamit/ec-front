@@ -93,11 +93,11 @@ const UserRegistration = ({ userStore }) => {
   });
 
   return (
-    <div class="global-container">
+    <div className="global-container">
       <div className={"card " + styles.signupCard}>
-        <div class="card-body">
-          <h3 class="card-title text-center">Sign Up with EverChange</h3>
-          <div class="card-text" />
+        <div className="card-body">
+          <h3 className="card-title text-center">Sign Up with EverChange</h3>
+          <div className="card-text" />
           <form className={styles.inputForm} onSubmit={formik.handleSubmit}>
             <div className="form-group ">
               <label htmlFor="firstName">First Name</label>
@@ -213,7 +213,7 @@ const UserRegistration = ({ userStore }) => {
               >
                 Loading..
                 <span
-                  class="spinner-grow spinner-grow-sm"
+                  className="spinner-grow spinner-grow-sm"
                   role="status"
                   aria-hidden="true"
                 ></span>
