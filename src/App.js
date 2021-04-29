@@ -2,15 +2,13 @@ import React from "react";
 import "./App.css";
 import UserRegistration from "./components/registration/registration";
 import UserLogin from "./components/login/login";
-import UserProfile from "./components/profile/profile";
 import NavigationBar from "./components/navigation/navigation";
-import SettingsPage from "./components/settings/settings";
 import ForgotPassword from "./components/forgotPassword/forgotPassword";
 import NotFoundPage from "./components/404/notFoundPage";
 import { Route, Switch } from "react-router-dom";
 import { observer } from "mobx-react";
 import { BrowserRouter as Router } from "react-router-dom";
-
+import Dashboard from "./components/dashboard/dashboard";
 function App({ userStore }) {
   return (
     <Router>
@@ -35,14 +33,14 @@ function App({ userStore }) {
             path="/profile"
             exact
             component={(props) => (
-              <UserProfile {...props} userStore={userStore} />
+              <Dashboard {...props} userStore={userStore} />
             )}
           />
           <Route
-            path="/settings"
+            path="/profile/*"
             exact
             component={(props) => (
-              <SettingsPage {...props} userStore={userStore} />
+              <Dashboard {...props} userStore={userStore} />
             )}
           />
           <Route

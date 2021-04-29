@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
-import { Redirect } from "react-router-dom";
 import { prodUrl } from "../urls";
 import Link from "../link/link";
 import DataTable from "./table";
@@ -11,7 +10,6 @@ import { DragDrop } from "@uppy/react";
 import NotificationModal from "../modal/notification";
 import "./profile.css";
 import styles from "./profile.module.css";
-import Sidebar from "../sidebar/sidebar";
 const UserProfile = ({ userStore }) => {
   const uppy = new Uppy({
     autoProceed: true,
@@ -52,101 +50,81 @@ const UserProfile = ({ userStore }) => {
       }
     });
   };
-  if (!userStore.loggedIn) {
-    return <Redirect to="/" />;
-  }
-  if (userStore.loggedIn & (userStore.user.firstName == null)) {
-    console.log("fetching data again because of page refresh");
-    fetchUser({ userStore });
-  }
-  if (!userStore.user.firstName) {
-    return <p>Loading.... Please wait.</p>;
-  }
+
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <Sidebar />
-        <div className="col-xs-12 col-sm-6 col-md-6">
-          <div className="well well-sm">
-            <div className="row">
-              <div>
-                <NotificationModal userStore={userStore} />
-              </div>
-              <div className="col-sm-6 col-md-4 ">
-                <div className="d-flex justify-content-center">
-                  <img
-                    src={`${prodUrl}/users/${userStore.user._id}/avatar`}
-                    alt=""
-                    className={"rounded-circle img-fluid " + styles.avatar}
-                  />
-                </div>
-                <br />
-                <div
-                  className={
-                    "d-flex justify-content-center btn " +
-                    styles.updateAvatarBtn
-                  }
-                >
-                  <DragDrop
-                    uppy={uppy}
-                    locale={{
-                      strings: {
-                        dropHereOr: "Update Avatar",
-                        browse: "browse",
-                      },
-                    }}
-                  />
-                </div>
-              </div>
-              <div className="col-sm-6 col-md-8">
-                <h4>{`${userStore.user.firstName} ${userStore.user.lastName}`}</h4>
+    <div className="col-xs-12 col-sm-6 col-md-6">
+      <div className="well well-sm">
+        <div className="row mt-5">
+          <div>
+            <NotificationModal userStore={userStore} />
+          </div>
+          <div className="col-sm-6 col-md-4 ">
+            <div className="d-flex justify-content-center">
+              <img
+                src={`${prodUrl}/users/${userStore.user._id}/avatar`}
+                alt=""
+                className={"rounded-circle img-fluid " + styles.avatar}
+              />
+            </div>
+            <br />
+            <div
+              className={
+                "d-flex justify-content-center btn " + styles.updateAvatarBtn
+              }
+            >
+              <DragDrop
+                uppy={uppy}
+                locale={{
+                  strings: {
+                    dropHereOr: "Update Avatar",
+                    browse: "browse",
+                  },
+                }}
+              />
+            </div>
+          </div>
+          <div className="col-sm-6 col-md-8">
+            <h4>{`${userStore.user.firstName} ${userStore.user.lastName}`}</h4>
 
-                <p>
-                  {userStore.user.email}
-                  <span
-                    className={`${
-                      userStore.user.emailVerified
-                        ? "text-success"
-                        : "text-danger"
-                    }`}
-                  >{`${
-                    userStore.user.emailVerified
-                      ? `(verified)`
-                      : `(not verified)`
-                  }`}</span>
-                </p>
+            <p>
+              {userStore.user.email}
+              <span
+                className={`${
+                  userStore.user.emailVerified ? "text-success" : "text-danger"
+                }`}
+              >{`${
+                userStore.user.emailVerified ? `(verified)` : `(not verified)`
+              }`}</span>
+            </p>
 
-                {userStore.user.emailVerified === false &&
-                  emailReset === false && (
-                    <button
-                      className="btn btn-primary"
-                      style={{ marginBottom: "15px" }}
-                      onClick={handleResendButton}
-                      onMouseDown={(e) => e.preventDefault()}
-                    >
-                      Resend Verification Email
-                    </button>
-                  )}
-                {userStore.user.emailVerified === false && emailReset === true && (
-                  <button
-                    className="btn btn-success"
-                    style={{ marginBottom: "15px" }}
-                    onClick={setTimeout(() => {
-                      setEmailReset(false);
-                    }, 3000)}
-                    onMouseDown={(e) => e.preventDefault()}
-                  >
-                    Verification Email Sent!
-                  </button>
-                )}
+            {userStore.user.emailVerified === false && emailReset === false && (
+              <button
+                className="btn btn-primary"
+                style={{ marginBottom: "15px" }}
+                onClick={handleResendButton}
+                onMouseDown={(e) => e.preventDefault()}
+              >
+                Resend Verification Email
+              </button>
+            )}
+            {userStore.user.emailVerified === false && emailReset === true && (
+              <button
+                className="btn btn-success"
+                style={{ marginBottom: "15px" }}
+                onClick={setTimeout(() => {
+                  setEmailReset(false);
+                }, 3000)}
+                onMouseDown={(e) => e.preventDefault()}
+              >
+                Verification Email Sent!
+              </button>
+            )}
 
-                <div>
-                  <Link userStore={userStore} />
-                  <br />
-                  <br />
-                  <DataTable userStore={userStore} />
-                </div>
-              </div>
+            <div>
+              <Link userStore={userStore} />
+              <br />
+              <br />
+              <DataTable userStore={userStore} />
             </div>
           </div>
         </div>
