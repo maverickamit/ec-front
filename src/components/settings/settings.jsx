@@ -108,7 +108,7 @@ const SettingsPage = ({ userStore }) => {
   }
 
   return (
-    <div className="global-container">
+    <div className="global-container container">
       <NotificationModal userStore={userStore} />
       <div className={"card " + styles.settingsCard}>
         <div className="card-body">

@@ -5,7 +5,7 @@ import styles from "./notFoundPage.module.css";
 
 const NotFoundPage = () => {
   return (
-    <div className="container bg-light">
+    <div className="container">
       <p className={styles.error + " text-center"}>
         404! Page not found. Go back to <Link to="/"> Home.</Link>
       </p>
