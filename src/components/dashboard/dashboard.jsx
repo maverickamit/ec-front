@@ -4,12 +4,11 @@ import Sidebar from "../sidebar/sidebar";
 import UserProfile from "../profile/profile";
 import SettingsPage from "../settings/settings";
 import fetchUser from "../modules/fetchUser";
-
 import { Route, Switch, useRouteMatch, Redirect } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
+
 const Dashboard = ({ userStore }) => {
   const { url, path } = useRouteMatch();
-
   if (!userStore.loggedIn) {
     return <Redirect to="/" />;
   }

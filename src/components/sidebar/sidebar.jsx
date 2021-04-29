@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { observer } from "mobx-react";
 import "./sidebar.css";
 import styles from "./sidebar.module.css";
@@ -16,9 +16,9 @@ const SideBar = ({ userStore }) => {
         </h6>
         <ul className="nav flex-column">
           <li className="nav-groups">
-            <a className="nav-link active" href="#">
-              Accout Summary
-            </a>
+            <p className="nav-link">
+              <Link to="/profile">Account Summary</Link>
+            </p>
           </li>
         </ul>
         <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase font-weight-bold">
@@ -55,11 +55,8 @@ const SideBar = ({ userStore }) => {
           </a>
         </h6>
         <ul className="nav flex-column mb-2">
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Update Profile
-            </a>
+          <li className="nav-item nav-link">
+            <Link to="/profile/settings">Update Profile</Link>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#">

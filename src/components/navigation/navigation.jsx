@@ -35,7 +35,7 @@ const NavigationBar = ({ userStore }) => {
             </li>
             <li className="nav-item active">
               <p className="nav-link">
-                <Link to="/settings">Settings</Link>
+                <Link to="/profile/settings">Settings</Link>
               </p>
             </li>
             <li className="nav-item active">
