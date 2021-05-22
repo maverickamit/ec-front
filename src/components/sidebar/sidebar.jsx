@@ -66,6 +66,13 @@ const SideBar = ({ userStore }) => {
           </li>
         </ul>
       </div>
+      <footer className={styles.footer}>
+        <div className="container">
+          <a href="#" className="text-muted font-weight-bold">
+            Contact Us
+          </a>
+        </div>
+      </footer>
     </nav>
   );
 };
