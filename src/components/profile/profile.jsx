@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { observer } from "mobx-react";
 import { prodUrl } from "../urls";
 import Link from "../link/link";
-import DataTable from "./table";
+import DataTable from "./transactionsTable/table";
 import CurrentCharity from "./currentCharity/currentCharity";
 import fetchUser from "../modules/fetchUser";
 import Uppy from "@uppy/core";

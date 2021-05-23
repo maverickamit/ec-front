@@ -28,10 +28,3 @@
   outline: none !important;
   box-shadow: none !important;
 }
-
-td,
-th {
-  text-align: center;
-  padding: 8px;
-  width: 20%;
-}

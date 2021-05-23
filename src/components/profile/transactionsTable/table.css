@@ -1,0 +1,9 @@
+td,
+th {
+  text-align: center;
+  padding: 8px;
+  width: 20%;
+}
+.transactionstable {
+  height: 100% !important;
+}
