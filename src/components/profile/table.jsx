@@ -8,13 +8,11 @@ const DataTable = ({ userStore }) => {
       title: "Date",
       dataIndex: "date",
       key: "date",
-      width: 150,
     },
     {
       title: "Amount($)",
       dataIndex: "amount",
       key: "amount",
-      width: 100,
     },
   ];
 
@@ -28,7 +26,7 @@ const DataTable = ({ userStore }) => {
     });
   });
   return (
-    <div>
+    <div className="border border-grey p-3">
       <h6>Details of amounts charged </h6>
       <Table columns={columns} data={data} />
     </div>
