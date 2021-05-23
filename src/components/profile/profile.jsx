@@ -52,13 +52,15 @@ const UserProfile = ({ userStore }) => {
   };
 
   return (
-    <div className="col-xs-12 col-sm-6 col-md-6">
+    <div className="col-xs-12 col-sm-6 col-md-10">
       <div className="well well-sm">
         <div className="row mt-5">
           <div>
             <NotificationModal userStore={userStore} />
           </div>
-          <div className="col-sm-6 col-md-4 ">
+
+          {/* User Avatar */}
+          <div className="col-sm-6 col-md-2">
             <div className="d-flex justify-content-center">
               <img
                 src={`${prodUrl}/users/${userStore.user._id}/avatar`}
@@ -69,23 +71,24 @@ const UserProfile = ({ userStore }) => {
             <br />
             <div
               className={
-                "d-flex justify-content-center btn " + styles.updateAvatarBtn
+                " d-flex justify-content-center btn " + styles.updateAvatarBtn
               }
             >
               <DragDrop
                 uppy={uppy}
                 locale={{
                   strings: {
-                    dropHereOr: "Update Avatar",
+                    dropHereOr: " Update Avatar",
                     browse: "browse",
                   },
                 }}
               />
             </div>
           </div>
+
+          {/* Basic Information */}
           <div className="col-sm-6 col-md-8">
             <h4>{`${userStore.user.firstName} ${userStore.user.lastName}`}</h4>
-
             <p>
               {userStore.user.email}
               <span
@@ -119,14 +122,25 @@ const UserProfile = ({ userStore }) => {
                 Verification Email Sent!
               </button>
             )}
-
-            <div>
-              <Link userStore={userStore} />
-              <br />
-              <br />
-              <DataTable userStore={userStore} />
-            </div>
           </div>
+        </div>
+
+        {/* Account Linking Status*/}
+        <div className="row mt-5">
+          <div>
+            <Link userStore={userStore} />
+            <br />
+            <br />
+          </div>
+        </div>
+        <div className="row mt-5">
+          {/* Recent Transactions*/}
+          <div className="col-sm-6 col-md-6">
+            <DataTable userStore={userStore} />
+          </div>
+
+          {/* Current Charity*/}
+          <div className="col-sm-6 col-md-6">Current Charity Module</div>
         </div>
       </div>
       <br></br>
