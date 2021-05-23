@@ -1,0 +1,13 @@
+.charity {
+  height: 100%;
+  padding: 1rem 2rem;
+}
+.donation {
+  width: 100%;
+  height: 5rem;
+  font-size: xx-large;
+  margin: 2rem 0 1rem 0;
+}
+.charityname {
+  margin-top: 0.5rem;
+}

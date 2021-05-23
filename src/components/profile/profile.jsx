@@ -3,6 +3,7 @@ import { observer } from "mobx-react";
 import { prodUrl } from "../urls";
 import Link from "../link/link";
 import DataTable from "./table";
+import CurrentCharity from "./currentCharity/currentCharity";
 import fetchUser from "../modules/fetchUser";
 import Uppy from "@uppy/core";
 import XHRUpload from "@uppy/xhr-upload";
@@ -140,7 +141,9 @@ const UserProfile = ({ userStore }) => {
           </div>
 
           {/* Current Charity*/}
-          <div className="col-sm-6 col-md-6">Current Charity Module</div>
+          <div className="col-sm-6 col-md-6">
+            <CurrentCharity userStore={userStore} />
+          </div>
         </div>
       </div>
       <br></br>
