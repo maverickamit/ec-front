@@ -11,38 +11,44 @@ const NavigationBar = ({ userStore }) => {
   };
   if (userStore.loggedIn) {
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <p className="navbar-brand" href="#">
-          <Link to="/"> EverChange</Link>
-        </p>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item active">
-              <a className="nav-link">
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  onClick={handleLogout}
-                  onMouseDown={(e) => e.preventDefault()}
-                >
-                  Logout
-                </button>
-              </a>
-            </li>
-          </ul>
+      <div className="container-fluid">
+        <div className="row">
+          <nav className="navbar left-nav navbar-expand-lg navbar-light col-md-2">
+            <p className="navbar-brand" href="#">
+              <Link to="/"> EverChange</Link>
+            </p>
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+          </nav>
+          <div className="navbar right-nav navbar-expand-lg col-md-10">
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item active">
+                  <a className="nav-link">
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      onClick={handleLogout}
+                      onMouseDown={(e) => e.preventDefault()}
+                    >
+                      Logout
+                    </button>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </nav>
+      </div>
     );
   }
 

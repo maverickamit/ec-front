@@ -1,3 +1,27 @@
 p.nav-link {
   margin-top: 6px;
 }
+.left-nav,
+.right-nav {
+  background-color: #04b589;
+}
+
+.navbar a:link {
+  color: whitesmoke;
+}
+
+/* visited link */
+.navbar a:visited {
+  color: whitesmoke;
+}
+
+/* mouse over link */
+.navbar a:hover {
+  color: whitesmoke;
+  text-decoration: none;
+}
+
+/* selected link */
+.navbar a:active {
+  color: whitesmoke;
+}
