@@ -10,9 +10,7 @@ const UserProfile = ({ userStore }) => {
   return (
     <div className="col-xs-12 col-sm-6 col-md-10">
       <div className="well well-sm">
-        <div className="row mt-5">
-          <NotificationModal userStore={userStore} />
-        </div>
+        <NotificationModal userStore={userStore} />
         <WelcomeHeader userStore={userStore} />
         <LinkedAccountInfo userStore={userStore} />
         <div className="row mt-5">
