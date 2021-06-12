@@ -1,5 +1,6 @@
 .sidebar {
-  height: calc(100vh - 78px);
+  height: calc(100vh - 72px);
+  background-color: #04b589;
 }
 .footer {
   position: absolute;

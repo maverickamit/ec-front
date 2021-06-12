@@ -1,0 +1,20 @@
+.side a:link {
+  color: whitesmoke;
+}
+
+/* visited link */
+.side a:visited {
+  color: whitesmoke;
+}
+
+/* mouse over link */
+.side a:hover {
+  color: whitesmoke;
+  background-color: #5287e3;
+  text-decoration: none;
+}
+
+/* selected link */
+.side a:active {
+  color: whitesmoke;
+}

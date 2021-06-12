@@ -6,24 +6,24 @@ import styles from "./sidebar.module.css";
 
 const SideBar = ({ userStore }) => {
   return (
-    <nav className={"col-md-2 d-none d-md-block bg-light " + styles.sidebar}>
+    <nav className={"col-md-2 d-none d-md-block side " + styles.sidebar}>
       <div className="sidebar-sticky">
-        <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase font-weight-bold">
+        <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-dark text-uppercase font-weight-bold">
           <span>Accout</span>
-          <a className="d-flex align-items-center text-muted" href="#">
+          <a className="d-flex align-items-center text-dark" href="#">
             <span data-feather="plus-circle"></span>
           </a>
         </h6>
         <ul className="nav flex-column">
           <li className="nav-groups">
-            <p className="nav-link">
-              <Link to="/profile">Account Summary</Link>
-            </p>
+            <Link className="nav-link" to="/profile">
+              Account Summary
+            </Link>
           </li>
         </ul>
-        <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase font-weight-bold">
+        <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-dark text-uppercase font-weight-bold">
           <span>Contributions</span>
-          <a className="d-flex align-items-center text-muted" href="#">
+          <a className="d-flex align-items-center text-dark" href="#">
             <span data-feather="plus-circle"></span>
           </a>
         </h6>
@@ -48,15 +48,17 @@ const SideBar = ({ userStore }) => {
           </li>
         </ul>
 
-        <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase font-weight-bold">
+        <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-dark text-uppercase font-weight-bold">
           <span>Settings</span>
-          <a className="d-flex align-items-center text-muted" href="#">
+          <a className="d-flex align-items-center text-dark" href="#">
             <span data-feather="plus-circle"></span>
           </a>
         </h6>
-        <ul className="nav flex-column mb-2">
-          <li className="nav-item nav-link">
-            <Link to="/profile/settings">Update Profile</Link>
+        <ul className="nav flex-column">
+          <li className="nav-groups">
+            <Link className="nav-link" to="/profile/settings">
+              Update Profile
+            </Link>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#">
@@ -68,7 +70,7 @@ const SideBar = ({ userStore }) => {
       </div>
       <footer className={styles.footer}>
         <div className="container">
-          <a href="#" className="text-muted font-weight-bold">
+          <a href="#" className="text-dark font-weight-bold">
             Contact Us
           </a>
         </div>
