@@ -79,7 +79,7 @@ const WelcomeHeader = ({ userStore }) => {
 
       {/* Basic Information */}
       <div className="col-sm-6 col-md-8">
-        <h4>{`  ${userStore.user.firstName} ${userStore.user.lastName}`}</h4>
+        <h2>{`  Welcome back, ${userStore.user.firstName}! `}</h2>
         <p>
           {userStore.user.email}
           <span
@@ -113,6 +113,13 @@ const WelcomeHeader = ({ userStore }) => {
             Verification Email Sent!
           </button>
         )}
+      </div>
+      {/* Total contributions */}
+      <div className="col-sm-6 col-md-2">
+        <div className="text-center">
+          <p>Total Contribution</p>
+          <h3>$375.24</h3>
+        </div>
       </div>
     </div>
   );
