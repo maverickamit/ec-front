@@ -29,16 +29,6 @@ const NavigationBar = ({ userStore }) => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item active">
-              <p className="nav-link">
-                <Link to="/profile">Dashboard</Link>
-              </p>
-            </li>
-            <li className="nav-item active">
-              <p className="nav-link">
-                <Link to="/profile/settings">Settings</Link>
-              </p>
-            </li>
-            <li className="nav-item active">
               <a className="nav-link">
                 <button
                   type="submit"
