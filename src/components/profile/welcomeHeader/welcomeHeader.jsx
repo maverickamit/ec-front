@@ -5,7 +5,7 @@ import Uppy from "@uppy/core";
 import XHRUpload from "@uppy/xhr-upload";
 import { DragDrop } from "@uppy/react";
 import "./../profile.css";
-import styles from "./../profile.module.css";
+import styles from "./welcomeHeader.module.css";
 
 const WelcomeHeader = ({ userStore }) => {
   const uppy = new Uppy({

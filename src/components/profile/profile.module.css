@@ -1,15 +1,3 @@
-.avatar {
-  max-width: 150px !important;
-}
-
-@media only screen and (max-width: 600px) {
-  .avatar {
-    max-width: 200px !important;
-  }
-  .updateAvatarBtn {
-    margin-bottom: 30px;
-  }
-}
 .dashboard {
   margin: 20px;
 }
