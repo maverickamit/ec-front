@@ -9,4 +9,7 @@
   .updateAvatarBtn {
     margin-bottom: 30px;
   }
+  .header {
+    text-align: center;
+  }
 }

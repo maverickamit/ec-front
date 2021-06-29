@@ -49,7 +49,7 @@ const WelcomeHeader = ({ userStore }) => {
   };
 
   return (
-    <div className="row mt-5">
+    <div className={`row mt-5 ${styles.header}`}>
       {/* User Avatar */}
       <div className="col-sm-6 col-md-2">
         <div className="d-flex justify-content-center">

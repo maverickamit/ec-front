@@ -13,8 +13,13 @@ const NavigationBar = ({ userStore }) => {
     return (
       <div className="container-fluid">
         <div className="row">
-          <nav className="navbar left-nav navbar-expand-lg navbar-light col-md-2">
-            <p className="navbar-brand" href="#">
+          <nav
+            className={
+              "navbar left-nav navbar-expand-lg navbar-light col-md-2 " +
+              styles.loggedNavbar
+            }
+          >
+            <p className="navbar-brand" href="/#">
               <Link to="/"> EverChange</Link>
             </p>
             <button

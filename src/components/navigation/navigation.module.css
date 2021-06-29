@@ -1,0 +1,19 @@
+.loggedNavbar a:link {
+  color: whitesmoke;
+}
+
+/* visited link */
+.loggedNavbar a:visited {
+  color: whitesmoke;
+}
+
+/* mouse over link */
+.loggedNavbar a:hover {
+  color: whitesmoke;
+  text-decoration: none;
+}
+
+/* selected link */
+.loggedNavbar a:active {
+  color: whitesmoke;
+}
