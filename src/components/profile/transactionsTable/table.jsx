@@ -3,6 +3,7 @@ import React from "react";
 import { observer } from "mobx-react";
 import styles from "./table.module.css";
 import "./table.css";
+
 const DataTable = ({ userStore }) => {
   const columns = [
     {
@@ -19,18 +20,22 @@ const DataTable = ({ userStore }) => {
 
   var data = [];
 
-  userStore.user.amountsCharged.map((item, index) => {
+  userStore.user.amountsCharged.slice(-5).map((item, index) => {
     data.push({
-      date: new Date(item.dateCharged).toLocaleDateString("en-US"),
+      date: new Date(item.dateCharged).toLocaleDateString("en-GB", {
+        month: "short",
+        day: "numeric",
+      }),
       amount: item.amount / 100,
       key: index,
     });
   });
+
   return (
     <div
       className={`container border border-grey p-3 ` + styles.transactionstable}
     >
-      <h6>Details of amounts charged </h6>
+      <h6>Recent Activity</h6>
       <Table columns={columns} data={data} />
     </div>
   );
