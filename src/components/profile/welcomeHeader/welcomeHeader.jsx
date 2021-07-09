@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react";
 import { prodUrl } from "../../urls";
 import Uppy from "@uppy/core";
@@ -31,7 +31,15 @@ const WelcomeHeader = ({ userStore }) => {
   });
 
   const [emailReset, setEmailReset] = useState(false);
+  const [sum, setSum] = useState(0);
 
+  useEffect(() => {
+    let num = 0;
+    for (let i = 0; i < userStore.user.amountsCharged.length; i++) {
+      num += userStore.user.amountsCharged[i].amount;
+    }
+    setSum(num / 100);
+  });
   const handleResendButton = () => {
     fetch(prodUrl + "/users/authenticate", {
       method: "post",
@@ -118,7 +126,7 @@ const WelcomeHeader = ({ userStore }) => {
       <div className="col-sm-6 col-md-2">
         <div className="text-center">
           <p>Total Contribution</p>
-          <h3>$375.24</h3>
+          <h3>${sum}</h3>
         </div>
       </div>
     </div>
