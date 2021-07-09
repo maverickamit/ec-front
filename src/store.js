@@ -8,7 +8,7 @@ class UserStore {
   isLoading = false;
   isNotification = false;
   notification = "";
-
+  transactions = [];
   setUser(user) {
     this.user = user;
   }
@@ -27,6 +27,10 @@ class UserStore {
   setIsNotification(isNotification) {
     this.isNotification = isNotification;
   }
+
+  setTransactions(transactions) {
+    this.transactions = transactions;
+  }
 }
 
 UserStore = decorate(UserStore, {
@@ -36,12 +40,14 @@ UserStore = decorate(UserStore, {
   isLoading: [observable],
   isNotification: [observable],
   notification: [observable],
+  transactions: [observable],
   setIsLoading: action,
   setUser: action,
   setLoggedIn: action,
   setToken: action,
   setIsNotification: action,
   setNotification: action,
+  setTransactions: action,
 });
 
 export { UserStore };
