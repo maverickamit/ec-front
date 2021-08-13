@@ -98,25 +98,23 @@ const Link = ({ userStore }) => {
   }
   const { open, ready, error } = usePlaidLink(config);
 
-  if (userStore.user.bankLinked) {
-    if (userStore.user.linkUpdateToken !== "") {
-      return (
-        <button
-          type="button"
-          className="btn btn-warning"
-          onClick={() => open()}
-          disabled={!ready}
-        >
-          Reverify bank account!
-        </button>
-      );
-    }
+  if (userStore.user.emailVerified === false) {
     return (
-      <button type="button" className="btn btn-success">
-        Bank Account Connected
+      <button
+        type="button"
+        className="btn btn-secondary"
+        onClick={() => {
+          userStore.setNotification(
+            "Please verify email account before proceeding"
+          );
+          userStore.setIsNotification(true);
+        }}
+      >
+        Connect a bank account
       </button>
     );
-  } else {
+  }
+  if (!userStore.user.bankLinked) {
     return (
       <button
         type="button"
@@ -128,5 +126,22 @@ const Link = ({ userStore }) => {
       </button>
     );
   }
+  if (userStore.user.linkUpdateToken !== "") {
+    return (
+      <button
+        type="button"
+        className="btn btn-warning"
+        onClick={() => open()}
+        disabled={!ready}
+      >
+        Reverify bank account!
+      </button>
+    );
+  }
+  return (
+    <button type="button" className="btn btn-success">
+      Bank Account Connected
+    </button>
+  );
 };
 export default observer(Link);
