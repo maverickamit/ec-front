@@ -4,7 +4,7 @@ import styles from "./currentCharity.module.css";
 const CurrentCharity = ({ userStore }) => {
   return (
     <div className={`container border border-grey ` + styles.charity}>
-      <h5>Current Charity</h5>
+      <h6>Current Charity</h6>
       <h2 className={styles.charityname}>Wounded Warriors Project</h2>
       <div className="text-center">
         <button
@@ -14,7 +14,7 @@ const CurrentCharity = ({ userStore }) => {
           Make a Direct Donation!
         </button>
         <br></br>
-        <a href="#">Update Charity</a>
+        <a href="/#">Update Charity</a>
       </div>
     </div>
   );

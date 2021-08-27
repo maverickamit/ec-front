@@ -4,10 +4,20 @@
 }
 .donation {
   width: 100%;
-  height: 5rem;
+  height: 4rem;
   font-size: xx-large;
   margin: 2rem 0 1rem 0;
 }
 .charityname {
   margin-top: 0.5rem;
+}
+@media only screen and (min-width: 320px) and (max-width: 1439px) {
+  .donation {
+    height: 2.5rem;
+    font-size: medium;
+  }
+  .charityname {
+    margin-top: 0.5rem;
+    font-size: large;
+  }
 }

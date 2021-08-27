@@ -48,7 +48,7 @@ const ForgotPassword = ({ userStore }) => {
 
   return (
     <div className="global-container">
-      <div className="card login-form">
+      <div className={"card " + styles.forgotPasswordCard}>
         <div className="card-body">
           <h3 className="card-title text-center">Forgot Password?</h3>
           <div className="card-text" />

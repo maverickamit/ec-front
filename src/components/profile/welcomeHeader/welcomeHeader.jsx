@@ -59,7 +59,7 @@ const WelcomeHeader = ({ userStore }) => {
   return (
     <div className={`row mt-5 ${styles.header}`}>
       {/* User Avatar */}
-      <div className="col-sm-6 col-md-2">
+      <div className="col-sm-4 col-md-2">
         <div className="d-flex justify-content-center">
           <img
             src={`${prodUrl}/users/${userStore.user._id}/avatar`}
@@ -86,7 +86,7 @@ const WelcomeHeader = ({ userStore }) => {
       </div>
 
       {/* Basic Information */}
-      <div className="col-sm-6 col-md-8">
+      <div className="col-sm-4 col-md-8">
         <h2>{`  Welcome back, ${userStore.user.firstName}! `}</h2>
         <p>
           {userStore.user.email}
@@ -123,7 +123,7 @@ const WelcomeHeader = ({ userStore }) => {
         )}
       </div>
       {/* Total contributions */}
-      <div className="col-sm-6 col-md-2">
+      <div className="col-sm-4 col-md-2">
         <div className="text-center">
           <p>Total Contribution</p>
           <h3>${sum}</h3>
