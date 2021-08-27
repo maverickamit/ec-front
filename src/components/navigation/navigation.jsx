@@ -62,7 +62,7 @@ const NavigationBar = ({ userStore }) => {
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link text-light" href="#">
+                      <a className="nav-link text-light" href="/#">
                         <span data-feather="file-text"></span>
                         Link Bank Account
                       </a>
@@ -92,7 +92,7 @@ const NavigationBar = ({ userStore }) => {
 
   return (
     <nav className="navbar navbar-expand-md navbar-light bg-light">
-      <p className="navbar-brand" href="#">
+      <p className="navbar-brand" href="/#">
         <Link to="/"> EverChange</Link>
       </p>
       <button
@@ -114,7 +114,7 @@ const NavigationBar = ({ userStore }) => {
             </p>
           </li>
           <li className="nav-item">
-            <p className="nav-link" href="#">
+            <p className="nav-link" href="/#">
               <Link to="/registration">Sign Up</Link>
             </p>
           </li>
