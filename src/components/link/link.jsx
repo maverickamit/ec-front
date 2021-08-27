@@ -84,7 +84,7 @@ const Link = ({ userStore }) => {
   if (!userStore.user.linkUpdateToken || !userStore.user.bankLinked) {
     var config = {
       clientName: "Your Link name",
-      env: "sandbox",
+      env: process.env.REACT_APP_PLAID_ENV,
       product: ["auth"],
       publicKey: "c920232687f1eaf83b9790d1f0fdc5",
       onSuccess,
