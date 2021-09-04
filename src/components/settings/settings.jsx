@@ -5,6 +5,8 @@ import { prodUrl } from "../urls";
 import { useState } from "react";
 import fetchUser from "../modules/fetchUser";
 import { useFormik } from "formik";
+import { useMediaQuery } from "react-responsive";
+
 import * as Yup from "yup";
 import Switch from "react-switch";
 import NotificationModal from "../modal/notification";
@@ -19,6 +21,9 @@ const SettingsPage = ({ userStore }) => {
     currentPassword: "",
     newPassword: "",
   };
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1200px)" });
+  const settingsWidth = isTabletOrMobile ? "col-md-9" : "col-md-10";
+
   const [alertMessage, setAlertMessage] = useState("");
 
   const resetErrors = () => {
@@ -108,9 +113,10 @@ const SettingsPage = ({ userStore }) => {
   }
 
   return (
-    <div className="global-container container">
+    <div className={"col-xs-12 col-sm-12 " + ` ${settingsWidth} `}>
+      {" "}
       <NotificationModal userStore={userStore} />
-      <div className={"card " + styles.settingsCard}>
+      <div className={styles.settingsCard}>
         <div className="card-body">
           <h3 className="card-title text-center">Update Details</h3>
           <div className="card-text" />
