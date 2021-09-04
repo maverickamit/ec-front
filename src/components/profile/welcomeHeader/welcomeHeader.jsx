@@ -40,20 +40,22 @@ const WelcomeHeader = ({ userStore }) => {
     }
     setSum(num / 100);
   });
-  const handleResendButton = () => {
-    fetch(prodUrl + "/users/authenticate", {
+
+  const handleResendButton = async () => {
+    const response = await fetch(prodUrl + "/users/authenticate", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + userStore.token,
       },
-    }).then((response) => {
-      if (response.status === 200) {
-        setEmailReset(true);
-      } else {
-        console.log("not successful");
-      }
     });
+    if (response.status === 200) {
+      userStore.setNotification("Verification Email Sent!");
+      userStore.setIsNotification(true);
+    } else {
+      userStore.setNotification("There has been an error.");
+      userStore.setIsNotification(true);
+    }
   };
 
   return (
@@ -107,18 +109,6 @@ const WelcomeHeader = ({ userStore }) => {
             onMouseDown={(e) => e.preventDefault()}
           >
             Resend Verification Email
-          </button>
-        )}
-        {userStore.user.emailVerified === false && emailReset === true && (
-          <button
-            className="btn btn-success"
-            style={{ marginBottom: "15px" }}
-            onClick={setTimeout(() => {
-              setEmailReset(false);
-            }, 3000)}
-            onMouseDown={(e) => e.preventDefault()}
-          >
-            Verification Email Sent!
           </button>
         )}
       </div>
