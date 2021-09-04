@@ -7,7 +7,7 @@ import styles from "./navigation.module.css";
 
 const NavigationBar = ({ userStore }) => {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1200px)" });
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 768px)" });
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 767px)" });
   const leftNavWidth = isTabletOrMobile ? "col-md-3" : "col-md-2";
   const rightNavWidth = isTabletOrMobile ? "col-md-9" : "col-md-10";
   const handleLogout = () => {
