@@ -9,6 +9,7 @@ class UserStore {
   isNotification = false;
   notification = "";
   transactions = [];
+  linkInitializeToken = "";
   setUser(user) {
     this.user = user;
   }
@@ -31,6 +32,10 @@ class UserStore {
   setTransactions(transactions) {
     this.transactions = transactions;
   }
+
+  setLinkInitializeToken(linkInitializeToken) {
+    this.linkInitializeToken = linkInitializeToken;
+  }
 }
 
 UserStore = decorate(UserStore, {
@@ -41,6 +46,7 @@ UserStore = decorate(UserStore, {
   isNotification: [observable],
   notification: [observable],
   transactions: [observable],
+  linkInitializeToken: [persist, observable],
   setIsLoading: action,
   setUser: action,
   setLoggedIn: action,
@@ -48,6 +54,7 @@ UserStore = decorate(UserStore, {
   setIsNotification: action,
   setNotification: action,
   setTransactions: action,
+  setLinkInitializeToken: action,
 });
 
 export { UserStore };

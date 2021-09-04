@@ -1,74 +1,98 @@
-import React, { useCallback } from "react";
 import { observer } from "mobx-react";
+import React, { useCallback, useState, useEffect } from "react";
 import { usePlaidLink } from "react-plaid-link";
 import { prodUrl } from "../urls";
 import fetchUser from "../modules/fetchUser";
 
 const Link = ({ userStore }) => {
-  const onSuccess = useCallback((token, metadata) => {
-    // send token to server
-    if (config.token == null) {
-      fetch(prodUrl + "/users/banking/plaidverify", {
+  async function createlinkInitializeToken() {
+    if (userStore.linkInitializeToken === "") {
+      let response = await fetch(prodUrl + "/users/banking/create_link_token", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + userStore.token,
         },
-        body: JSON.stringify({
-          PUBLIC_TOKEN: token,
-          ACCOUNT_ID: metadata.account_id,
-        }),
-      })
-        .then((response) => {
-          if (response.status === 200) {
-            fetchUser({ userStore });
-            userStore.setNotification("Account is successfully linked");
-            userStore.setIsNotification(true);
-          } else {
-            userStore.setNotification(
-              "There has been an error in linking account"
-            );
-            userStore.setIsNotification(true);
-          }
-        })
-        .catch((err) => {
+      });
+      const link_token = await response.text();
+      userStore.setLinkInitializeToken(link_token);
+    }
+  }
+
+  useEffect(() => {
+    createlinkInitializeToken();
+  }, []);
+
+  const onSuccess = useCallback((token, metadata) => {
+    // send token to server
+
+    fetch(prodUrl + "/users/banking/plaidverify", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userStore.token,
+      },
+      body: JSON.stringify({
+        PUBLIC_TOKEN: token,
+        ACCOUNT_ID: metadata.account_id,
+      }),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          fetchUser({ userStore });
+          userStore.setNotification("Account is successfully linked");
+          userStore.setIsNotification(true);
+        } else {
           userStore.setNotification(
             "There has been an error in linking account"
           );
           userStore.setIsNotification(true);
-          console.log(err);
-        });
-    } else {
-      fetch(prodUrl + "/users/banking/plaidupdate", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + userStore.token,
-        },
+        }
       })
-        .then((response) => {
-          if (response.status === 200) {
-            fetchUser({ userStore });
-            userStore.setNotification("Account is successfully updated");
-            userStore.setIsNotification(true);
-          } else {
-            userStore.setNotification(
-              "There has been an error in updating account"
-            );
-            userStore.setIsNotification(true);
-          }
-        })
-        .catch((err) => {
+      .catch((err) => {
+        userStore.setNotification("There has been an error in linking account");
+        userStore.setIsNotification(true);
+        console.log(err);
+      });
+  }, []);
+
+  const onUpdate = useCallback((token, metadata) => {
+    fetch(prodUrl + "/users/banking/plaidupdate", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userStore.token,
+      },
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          fetchUser({ userStore });
+          userStore.setNotification("Account is successfully updated");
+          userStore.setIsNotification(true);
+        } else {
           userStore.setNotification(
             "There has been an error in updating account"
           );
           userStore.setIsNotification(true);
-          console.log(err);
-        });
-    }
+        }
+      })
+      .catch((err) => {
+        userStore.setNotification(
+          "There has been an error in updating account"
+        );
+        userStore.setIsNotification(true);
+        console.log(err);
+      });
   }, []);
 
   const onExit = useCallback((err, metadata) => {
+    if (err != null && err.error_code === "INVALID_LINK_TOKEN") {
+      userStore.setLinkInitializeToken("");
+      createlinkInitializeToken();
+    }
+  });
+
+  const onUpdateExit = useCallback((err, metadata) => {
     if (err != null && err.error_code === "INVALID_LINK_TOKEN") {
       fetch(prodUrl + "/users/banking/create_link_token", {
         method: "post",
@@ -76,28 +100,37 @@ const Link = ({ userStore }) => {
           "Content-Type": "application/json",
           Authorization: "Bearer " + userStore.token,
         },
+        body: JSON.stringify({
+          mode: "update",
+        }),
       }).then(() => {
         fetchUser({ userStore });
       });
     }
   });
+
   if (!userStore.user.linkUpdateToken || !userStore.user.bankLinked) {
     var config = {
-      clientName: "Your Link name",
-      env: process.env.REACT_APP_PLAID_ENV,
-      product: ["auth"],
-      publicKey: "c920232687f1eaf83b9790d1f0fdc5",
+      token: userStore.linkInitializeToken,
       onSuccess,
+      onExit,
     };
   } else {
     var config = {
       token: userStore.user.linkUpdateToken,
-      onSuccess,
-      onExit,
+      onUpdate,
+      onUpdateExit,
     };
   }
-  const { open, ready, error } = usePlaidLink(config);
 
+  const { open, ready, error } = usePlaidLink(config);
+  if (userStore.linkInitializeToken === "") {
+    return (
+      <div className="spinner-grow" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+    );
+  }
   if (userStore.user.emailVerified === false) {
     return (
       <button
@@ -122,7 +155,7 @@ const Link = ({ userStore }) => {
         onClick={() => open()}
         disabled={!ready}
       >
-        Connect a bank account
+        Connect bank account!
       </button>
     );
   }
@@ -144,4 +177,5 @@ const Link = ({ userStore }) => {
     </button>
   );
 };
+
 export default observer(Link);
