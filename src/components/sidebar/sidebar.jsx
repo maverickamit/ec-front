@@ -41,11 +41,10 @@ const SideBar = ({ userStore }) => {
               Activity <span className="sr-only">(current)</span>
             </a>
           </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/#">
-              <span data-feather="file"></span>
+          <li className="nav-groups">
+            <Link className="nav-link" to="/profile/charity">
               Update Charity
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="/#">

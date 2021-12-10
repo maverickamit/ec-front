@@ -3,6 +3,7 @@ import { observer } from "mobx-react";
 import Sidebar from "../sidebar/sidebar";
 import UserProfile from "../profile/profile";
 import SettingsPage from "../settings/settings";
+import UpdateCharityPage from "../updateCharity/updateCharity";
 import fetchUser from "../modules/fetchUser";
 import { Route, Switch, useRouteMatch, Redirect } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -30,6 +31,13 @@ const Dashboard = ({ userStore }) => {
               exact
               component={(props) => (
                 <SettingsPage {...props} userStore={userStore} />
+              )}
+            />
+            <Route
+              path={`/profile/charity`}
+              exact
+              component={(props) => (
+                <UpdateCharityPage {...props} userStore={userStore} />
               )}
             />
             <Route
