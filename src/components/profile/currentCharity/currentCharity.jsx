@@ -1,6 +1,8 @@
 import React from "react";
 import { observer } from "mobx-react";
 import styles from "./currentCharity.module.css";
+import { Link } from "react-router-dom";
+
 const CurrentCharity = ({ userStore }) => {
   return (
     <div className={`container border border-grey ` + styles.charity}>
@@ -14,7 +16,9 @@ const CurrentCharity = ({ userStore }) => {
           Make a Direct Donation!
         </button>
         <br></br>
-        <a href="/#">Update Charity</a>
+        <Link className="nav-link" to="/profile/charity">
+          Update Charity
+        </Link>
       </div>
     </div>
   );
