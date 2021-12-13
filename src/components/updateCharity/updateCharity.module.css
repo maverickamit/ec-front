@@ -1,0 +1,18 @@
+.inputForm {
+  padding-top: 10px;
+  font-size: 14px;
+  margin-top: 30px;
+}
+.updateCharityCard {
+  width: 500px;
+}
+.updateCharityCardMobile {
+  width: 90vw;
+}
+.toogleAlert {
+  margin: 10px 0 10px 0;
+}
+
+.logoutAllBtn {
+  margin: 10px 0 10px 0;
+}
