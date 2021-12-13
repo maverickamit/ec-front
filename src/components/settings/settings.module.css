@@ -6,6 +6,9 @@
 .settingsCard {
   width: 500px;
 }
+.settingsCardMobile {
+  width: 90vw;
+}
 .toogleAlert {
   margin: 10px 0 10px 0;
 }

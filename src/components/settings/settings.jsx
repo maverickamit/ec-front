@@ -22,6 +22,7 @@ const SettingsPage = ({ userStore }) => {
     newPassword: "",
   };
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1200px)" });
+  const isMobile = useMediaQuery({ query: "(max-width: 500px)" });
   const settingsWidth = isTabletOrMobile ? "col-md-9" : "col-md-10";
 
   const [alertMessage, setAlertMessage] = useState("");
@@ -116,7 +117,9 @@ const SettingsPage = ({ userStore }) => {
     <div className={"col-xs-12 col-sm-12 " + ` ${settingsWidth} `}>
       {" "}
       <NotificationModal userStore={userStore} />
-      <div className={styles.settingsCard}>
+      <div
+        className={isMobile ? styles.settingsCardMobile : styles.settingsCard}
+      >
         <div className="card-body">
           <h3 className="card-title text-center">Update Details</h3>
           <div className="card-text" />
