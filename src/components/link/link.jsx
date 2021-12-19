@@ -25,87 +25,88 @@ const Link = ({ userStore }) => {
 
   const onSuccess = useCallback((token, metadata) => {
     // send token to server
-
-    fetch(prodUrl + "/users/banking/plaidverify", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + userStore.token,
-      },
-      body: JSON.stringify({
-        PUBLIC_TOKEN: token,
-        ACCOUNT_ID: metadata.account_id,
-      }),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          fetchUser({ userStore });
-          userStore.setNotification("Account is successfully linked");
-          userStore.setIsNotification(true);
-        } else {
-          userStore.setNotification(
-            "There has been an error in linking account"
-          );
-          userStore.setIsNotification(true);
-        }
-      })
-      .catch((err) => {
-        userStore.setNotification("There has been an error in linking account");
-        userStore.setIsNotification(true);
-        console.log(err);
-      });
-  }, []);
-
-  const onUpdate = useCallback((token, metadata) => {
-    fetch(prodUrl + "/users/banking/plaidupdate", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + userStore.token,
-      },
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          fetchUser({ userStore });
-          userStore.setNotification("Account is successfully updated");
-          userStore.setIsNotification(true);
-        } else {
-          userStore.setNotification(
-            "There has been an error in updating account"
-          );
-          userStore.setIsNotification(true);
-        }
-      })
-      .catch((err) => {
-        userStore.setNotification(
-          "There has been an error in updating account"
-        );
-        userStore.setIsNotification(true);
-        console.log(err);
-      });
-  }, []);
-
-  const onExit = useCallback((err, metadata) => {
-    if (err != null && err.error_code === "INVALID_LINK_TOKEN") {
-      userStore.setLinkInitializeToken("");
-      createlinkInitializeToken();
-    }
-  });
-
-  const onUpdateExit = useCallback((err, metadata) => {
-    if (err != null && err.error_code === "INVALID_LINK_TOKEN") {
-      fetch(prodUrl + "/users/banking/create_link_token", {
+    if (!userStore.user.linkUpdateToken || !userStore.user.bankLinked) {
+      fetch(prodUrl + "/users/banking/plaidverify", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + userStore.token,
         },
         body: JSON.stringify({
-          mode: "update",
+          PUBLIC_TOKEN: token,
+          ACCOUNT_ID: metadata.account_id,
         }),
-      }).then(() => {
-        fetchUser({ userStore });
-      });
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            fetchUser({ userStore });
+            userStore.setNotification("Account is successfully linked");
+            userStore.setIsNotification(true);
+          } else {
+            userStore.setNotification(
+              "There has been an error in linking account"
+            );
+            userStore.setIsNotification(true);
+          }
+        })
+        .catch((err) => {
+          userStore.setNotification(
+            "There has been an error in linking account"
+          );
+          userStore.setIsNotification(true);
+          console.log(err);
+        });
+    } else {
+      fetch(prodUrl + "/users/banking/plaidupdate", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + userStore.token,
+        },
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            fetchUser({ userStore });
+            userStore.setNotification("Account is successfully updated");
+            userStore.setIsNotification(true);
+          } else {
+            userStore.setNotification(
+              "There has been an error in updating account"
+            );
+            userStore.setIsNotification(true);
+          }
+        })
+        .catch((err) => {
+          userStore.setNotification(
+            "There has been an error in updating account"
+          );
+          userStore.setIsNotification(true);
+          console.log(err);
+        });
+    }
+  }, []);
+
+  const onExit = useCallback((err, metadata) => {
+    if (!userStore.user.linkUpdateToken || !userStore.user.bankLinked) {
+      if (err != null && err.error_code === "INVALID_LINK_TOKEN") {
+        userStore.setLinkInitializeToken("");
+        createlinkInitializeToken();
+      }
+    } else {
+      if (err != null && err.error_code === "INVALID_LINK_TOKEN") {
+        fetch(prodUrl + "/users/banking/create_link_token", {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + userStore.token,
+          },
+          body: JSON.stringify({
+            mode: "update",
+          }),
+        }).then(() => {
+          fetchUser({ userStore });
+        });
+      }
     }
   });
 
@@ -118,8 +119,8 @@ const Link = ({ userStore }) => {
   } else {
     var config = {
       token: userStore.user.linkUpdateToken,
-      onUpdate,
-      onUpdateExit,
+      onSuccess,
+      onExit,
     };
   }
 
