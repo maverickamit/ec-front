@@ -17,10 +17,6 @@ const initialValues = {
 const UserLogin = ({ userStore }) => {
   const [alert, setAlert] = useState("");
 
-  const firstRun = true;
-  if (firstRun) {
-  }
-
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: Yup.object({
@@ -51,6 +47,7 @@ const UserLogin = ({ userStore }) => {
             setAlert(
               "Unable to Login. Username and/or password are incorrect."
             );
+            resetErrors();
           } else {
             setAlert("");
             userStore.setUser(data.user);
@@ -60,8 +57,8 @@ const UserLogin = ({ userStore }) => {
         });
     },
   });
-  const resetErrors = (setErrors) => {
-    setTimeout(() => setErrors({}), 3000);
+  const resetErrors = () => {
+    setTimeout(() => setAlert(""), 3000);
   };
 
   if (userStore.loggedIn) {
