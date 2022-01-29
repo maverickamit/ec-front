@@ -1,14 +1,24 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import * as Yup from "yup";
 import { observer } from "mobx-react";
-import { Redirect } from "react-router-dom";
 import { prodUrl } from "../urls";
+import {
+  Avatar,
+  Alert,
+  TextField,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  CssBaseline,
+} from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import "./login.css";
 import styles from "./login.module.css";
 
-import NotificationModal from "../modal/notification";
 const initialValues = {
   email: "",
   password: "",
@@ -57,6 +67,7 @@ const UserLogin = ({ userStore }) => {
         });
     },
   });
+
   const resetErrors = () => {
     setTimeout(() => setAlert(""), 3000);
   };
@@ -66,87 +77,82 @@ const UserLogin = ({ userStore }) => {
   }
 
   return (
-    <div className="global-container">
-      <div className={"card " + styles.loginCard}>
-        <div className="card-body">
-          <NotificationModal userStore={userStore} />
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Log In
+        </Typography>
+        <Box
+          component="form"
+          noValidate
+          sx={{ mt: 1 }}
+          onSubmit={formik.handleSubmit}
+        >
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
+            helperText={formik.errors.email}
+            error={formik.touched.email && formik.errors.email}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.password}
+            helperText={formik.errors.password}
+            error={formik.touched.password && formik.errors.password}
+          />
+          <LoadingButton
+            loading={userStore.isLoading}
+            className={styles.loginbtn}
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Log In
+          </LoadingButton>
 
-          <h3 className="card-title text-center">Log in to EverChange</h3>
-          <div className="card-text" />
-          <form className={styles.inputForm} onSubmit={formik.handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="email">Email Address</label>
-              <input
-                className="form-control"
-                id="email"
-                name="email"
-                type="email"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
-              />
-            </div>
-            {formik.touched.email && formik.errors.email ? (
-              <div className="alert alert-warning" role="alert">
-                {formik.errors.email}
-              </div>
-            ) : null}
-            <div className="form-group">
-              <label htmlFor="Password">Password</label>
-              <input
-                className="form-control"
-                id="password"
-                name="password"
-                type="password"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.password}
-              />
-            </div>
-            {formik.touched.password && formik.errors.password ? (
-              <div className="alert alert-warning" role="alert">
-                {formik.errors.password}
-              </div>
-            ) : null}
-            <br />
-            <div className={styles.forgotPasswordbtn + " btn"}>
+          <Grid container>
+            <Grid item xs>
               <Link to="/forgot-password">Forgot Password?</Link>
-            </div>
-            {userStore.isLoading ? (
-              <button
-                type="submit"
-                id="loginbtn"
-                className={"btn btn-primary " + styles.loginbtn}
-                onMouseDown={(e) => e.preventDefault()}
-              >
-                Loading..
-                <span
-                  className="spinner-grow spinner-grow-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-              </button>
-            ) : (
-              <button
-                type="submit"
-                className={"btn btn-primary " + styles.loginbtn}
-                onMouseDown={(e) => e.preventDefault()}
-              >
-                Login
-              </button>
-            )}
-            <br />
-            <br />
-            {alert !== "" ? (
-              <div className="alert alert-danger" role="alert">
-                {alert}
-              </div>
-            ) : null}
-          </form>
-        </div>
-      </div>
-    </div>
+            </Grid>
+            <Grid item>
+              <Link to="/registration">Sign Up Here</Link>
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item xs sx={{ mt: 3, mb: 2 }}>
+              {alert && <Alert severity="error">{alert}</Alert>}
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+    </Container>
   );
 };
-
 export default observer(UserLogin);
