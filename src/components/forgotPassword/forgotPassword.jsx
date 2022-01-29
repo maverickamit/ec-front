@@ -1,8 +1,21 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
+import { Link, Redirect } from "react-router-dom";
 import * as Yup from "yup";
 import { observer } from "mobx-react";
 import { prodUrl } from "../urls";
+import {
+  Avatar,
+  Alert,
+  TextField,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  CssBaseline,
+} from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import KeyIcon from "@mui/icons-material/Key";
 import "./forgotPassword.css";
 import styles from "./forgotPassword.module.css";
 
@@ -33,12 +46,14 @@ const ForgotPassword = ({ userStore }) => {
             resetForm(initialValues);
             return "successful";
           } else {
-            return "unable to login";
+            return "unable to reset";
           }
         })
         .then((data) => {
-          if (data === "unable to login") {
-            setAlert("Something went wrong. Please recheck your email.");
+          if (data === "unable to reset") {
+            setAlert(
+              "Something went wrong. Please recheck your email address."
+            );
           } else {
             setAlert("Please check your email for the password reset link.");
           }
@@ -47,68 +62,71 @@ const ForgotPassword = ({ userStore }) => {
   });
 
   return (
-    <div className="global-container">
-      <div className={"card " + styles.forgotPasswordCard}>
-        <div className="card-body">
-          <h3 className="card-title text-center">Forgot Password?</h3>
-          <div className="card-text" />
-          <form onSubmit={formik.handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="email">Email Address</label>
-              <input
-                className="form-control"
-                id="email"
-                name="email"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
-              />
-            </div>
-            {formik.touched.email && formik.errors.email ? (
-              <div className="alert alert-warning" role="alert">
-                {formik.errors.email}
-              </div>
-            ) : null}
-            <br />
-            {userStore.isLoading ? (
-              <button
-                type="submit"
-                className="btn btn-primary"
-                onMouseDown={(e) => e.preventDefault()}
-              >
-                Loading..
-                <span
-                  className="spinner-grow spinner-grow-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-              </button>
-            ) : (
-              <button
-                type="submit"
-                className="btn btn-primary"
-                onMouseDown={(e) => e.preventDefault()}
-              >
-                Reset Password
-              </button>
-            )}
-            <br />
-            <br />
-            {alert ===
-            "Please check your email for the password reset link." ? (
-              <div className="alert alert-success" role="alert">
-                {alert}
-              </div>
-            ) : null}
-            {alert === "Something went wrong. Please recheck your email." ? (
-              <div className="alert alert-danger" role="alert">
-                {alert}
-              </div>
-            ) : null}
-          </form>
-        </div>
-      </div>
-    </div>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <KeyIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Forgot Password?
+        </Typography>
+        <Box
+          component="form"
+          noValidate
+          sx={{ mt: 1 }}
+          onSubmit={formik.handleSubmit}
+        >
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
+            helperText={formik.errors.email}
+            error={formik.touched.email && formik.errors.email}
+          />
+
+          <LoadingButton
+            loading={userStore.isLoading}
+            className={styles.forgotPasswordBtn}
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Reset Password
+          </LoadingButton>
+          <Grid container>
+            <Grid item xs>
+              <Link to="/">Log In Here</Link>
+            </Grid>
+            <Grid item>
+              <Link to="/registration">Sign Up Here</Link>
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item xs sx={{ mt: 3, mb: 2 }}>
+              {alert.includes("password reset link") && <Alert>{alert}</Alert>}
+              {alert.includes("Something went wrong") && (
+                <Alert severity="error">{alert}</Alert>
+              )}
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 export default observer(ForgotPassword);
