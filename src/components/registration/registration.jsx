@@ -1,10 +1,25 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
+import { Link, Redirect } from "react-router-dom";
 import * as Yup from "yup";
 import { observer } from "mobx-react";
 import { prodUrl } from "../urls";
 import "./registration.css";
 import styles from "./registration.module.css";
+import {
+  Avatar,
+  Alert,
+  TextField,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  Checkbox,
+  FormControlLabel,
+  CssBaseline,
+} from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { LoadingButton } from "@mui/lab";
 
 const UserRegistration = ({ userStore }) => {
   const [alert, setAlert] = useState("");
@@ -70,7 +85,6 @@ const UserRegistration = ({ userStore }) => {
       })
         .then((response) => {
           userStore.setIsLoading(false);
-
           if (response.status === 201) {
             resetForm(initialValues);
             uncheck();
@@ -93,159 +107,160 @@ const UserRegistration = ({ userStore }) => {
   });
 
   return (
-    <div className="global-container">
-      <div className={"card " + styles.signupCard}>
-        <div className="card-body">
-          <h3 className="card-title text-center">Sign Up with EverChange</h3>
-          <div className="card-text" />
-          <form className={styles.inputForm} onSubmit={formik.handleSubmit}>
-            <div className="form-group ">
-              <label htmlFor="firstName">First Name</label>
-              <input
-                className="form-control"
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <AccountCircleIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign Up
+        </Typography>
+        <Box
+          component="form"
+          noValidate
+          sx={{ mt: 1 }}
+          onSubmit={formik.handleSubmit}
+        >
+          <Grid container>
+            <Grid item xs={6} paddingRight={2}>
+              <TextField
+                margin="normal"
+                required
                 id="firstName"
+                label="First Name"
                 name="firstName"
-                type="text"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.firstName}
+                helperText={formik.errors.firstName}
+                error={formik.touched.firstName && formik.errors.firstName}
               />
-            </div>
-            {formik.touched.firstName && formik.errors.firstName ? (
-              <div className="alert alert-warning" role="alert">
-                {formik.errors.firstName}
-              </div>
-            ) : null}
-            <div className="form-group">
-              <label htmlFor="lastName">Last Name</label>
-              <input
-                className="form-control "
-                id="lastName"
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                margin="normal"
+                required
                 name="lastName"
-                type="text"
+                label="Last Name"
+                id="lastName"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.lastName}
+                helperText={formik.errors.lastName}
+                error={formik.touched.lastName && formik.errors.lastName}
               />
-            </div>
-            {formik.touched.lastName && formik.errors.lastName ? (
-              <div className="alert alert-warning" role="alert">
-                {formik.errors.lastName}
-              </div>
-            ) : null}
-            <div className="form-group">
-              <label htmlFor="email">Email Address</label>
-              <input
-                className="form-control"
-                id="email"
-                name="email"
-                type="email"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
-              />
-            </div>
-            {formik.touched.email && formik.errors.email ? (
-              <div className="alert alert-warning" role="alert">
-                {formik.errors.email}
-              </div>
-            ) : null}
-            <div className="form-group">
-              <label htmlFor="Password">Password</label>
-              <input
-                className="form-control"
-                id="password"
-                name="password"
-                type="password"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.password}
-              />
-            </div>
-            {formik.touched.password && formik.errors.password ? (
-              <div className="alert alert-warning" role="alert">
-                {formik.errors.password}
-              </div>
-            ) : null}
-            <div className="form-group">
-              <label htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                className="form-control"
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.confirmPassword}
-              />
-            </div>
-            {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-              <div className="alert alert-danger" role="alert">
-                {formik.errors.confirmPassword}
-              </div>
-            ) : null}
-
-            <div>
-              <input
-                id="agreeToTerms"
+            </Grid>
+          </Grid>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="email"
+            label="Email Address"
+            type="email"
+            id="email"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
+            helperText={formik.errors.email}
+            error={formik.touched.email && formik.errors.email}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.password}
+            helperText={formik.errors.password}
+            error={formik.touched.password && formik.errors.password}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="confirmPassword"
+            label="Confirm Password"
+            type="password"
+            id="confirmPassword"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.confirmPassword}
+            helperText={formik.errors.confirmPassword}
+            error={
+              formik.touched.confirmPassword && formik.errors.confirmPassword
+            }
+          />
+          <FormControlLabel
+            sx={{ mt: 3, mb: 2 }}
+            control={
+              <Checkbox
+                margin="normal"
+                required
+                fullWidth
                 name="agreeToTerms"
+                label="Confirm Password"
                 type="checkbox"
+                id="agreeToTerms"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.agreeToTerms}
-              />{" "}
-              I have read and agree to the Terms and Conditions and Privacy
-              Policy
-            </div>
+                helperText={formik.errors.agreeToTerms}
+                error={
+                  formik.touched.agreeToTerms && formik.errors.agreeToTerms
+                }
+              />
+            }
+            label="I have read and agree to the Terms and Conditions and Privacy Policy"
+          />
 
-            {formik.touched.agreeToTerms && formik.errors.agreeToTerms ? (
-              <div className="alert alert-info" role="alert">
-                {formik.errors.agreeToTerms}
-              </div>
-            ) : null}
-            <br />
-            {userStore.isLoading ? (
-              <button
-                type="submit"
-                className="btn btn-primary"
-                disabled
-                onMouseDown={(e) => e.preventDefault()}
-              >
-                Loading..
-                <span
-                  className="spinner-grow spinner-grow-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-              </button>
-            ) : (
-              <button
-                type="submit"
-                className="btn btn-primary"
-                onMouseDown={(e) => e.preventDefault()}
-              >
-                Submit
-              </button>
-            )}
-            <br />
-            <br />
+          {formik.touched.agreeToTerms && formik.errors.agreeToTerms && (
+            <Alert severity="warning">{formik.errors.agreeToTerms}</Alert>
+          )}
 
-            {alert === "Unable to Register. Email already in use." ? (
-              <div className="alert alert-danger" role="alert">
-                {alert}
-              </div>
-            ) : null}
-
-            {alert !== "Unable to Register. Email already in use." &&
-            alert !== "" ? (
-              <div className="alert alert-success" role="alert">
-                {alert}
-              </div>
-            ) : null}
-          </form>
-        </div>
-      </div>
-    </div>
+          <LoadingButton
+            className={styles.signUpBtn}
+            loading={userStore.isLoading}
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Sign Up
+          </LoadingButton>
+          <Grid container>
+            <Grid item xs>
+              <Link to="/forgot-password">Forgot Password?</Link>
+            </Grid>
+            <Grid item>
+              <Link to="/">Log In Here</Link>
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item xs sx={{ mt: 3, mb: 2 }}>
+              {alert.includes("Email already in use") && (
+                <Alert severity="error">{alert}</Alert>
+              )}
+              {alert.includes("successfully registered") && (
+                <Alert>{alert}</Alert>
+              )}
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 
