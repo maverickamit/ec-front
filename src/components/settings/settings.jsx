@@ -285,7 +285,7 @@ const SettingsPage = ({ userStore }) => {
       >
         Log out from all sessions
       </LoadingButton>
-      <Stack direction="row" alignItems="center">
+      <Stack direction="row" alignItems="center" sx={{ mb: 5 }}>
         <Typography> Bank Account Unlinked</Typography>
         <Switch
           checked={checked}
