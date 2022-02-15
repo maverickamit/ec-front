@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { observer } from "mobx-react";
-import { Redirect } from "react-router-dom";
 import { prodUrl } from "../urls";
-import { useState } from "react";
 import fetchUser from "../modules/fetchUser";
 import { useFormik } from "formik";
-import { useMediaQuery } from "react-responsive";
-
+import { Link, Redirect } from "react-router-dom";
 import * as Yup from "yup";
-import Switch from "react-switch";
+import {
+  TextField,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  CssBaseline,
+  Switch,
+  Stack,
+} from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import NotificationModal from "../modal/notification";
 import "./settings.css";
 import styles from "./settings.module.css";
@@ -21,15 +28,7 @@ const SettingsPage = ({ userStore }) => {
     currentPassword: "",
     newPassword: "",
   };
-  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1200px)" });
-  const isMobile = useMediaQuery({ query: "(max-width: 500px)" });
-  const settingsWidth = isTabletOrMobile ? "col-md-9" : "col-md-10";
 
-  const [alertMessage, setAlertMessage] = useState("");
-
-  const resetErrors = () => {
-    setTimeout(() => setAlertMessage(""), 3000);
-  };
   const handleLogoutAllDevices = () => {
     fetch(prodUrl + "/users/logoutAll", {
       method: "post",
@@ -48,6 +47,7 @@ const SettingsPage = ({ userStore }) => {
       userStore.setIsNotification(true);
     });
   };
+
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: Yup.object({
@@ -73,22 +73,20 @@ const SettingsPage = ({ userStore }) => {
         }),
       }).then((response) => {
         if (response.status === 200) {
-          setAlertMessage("Successful Update.");
-          resetErrors();
+          userStore.setNotification("Successfully updated details.");
           fetchUser({ userStore });
         } else {
-          setAlertMessage("Unsuccessful update. Please use correct password.");
-          resetErrors();
+          userStore.setNotification(
+            "Unsuccessful update. Please use correct password."
+          );
         }
       });
+      userStore.setIsNotification(true);
     },
   });
 
   const [checked, setChecked] = useState(userStore.user.bankLinked);
-  const [toogleAlertMessage, setToogleAlertMessage] = useState("");
-  const resetToogleErrors = () => {
-    setTimeout(() => setToogleAlertMessage(""), 1500);
-  };
+
   const handleAccountLinkButton = async () => {
     const resp = await fetch(prodUrl + "/users/banking/plaiddelete", {
       method: "POST",
@@ -98,15 +96,15 @@ const SettingsPage = ({ userStore }) => {
       },
     });
     if (resp.status === 400) {
-      setToogleAlertMessage("Please verify bank account first.");
+      userStore.setNotification("Please verify bank account first.");
     } else if (resp.status === 500) {
-      setToogleAlertMessage("Error. Please try again after some time.");
+      userStore.setNotification("Error. Please try again after some time.");
     } else {
       setChecked(!checked);
-      setToogleAlertMessage("Success!");
+      userStore.setNotification("Bank account linking status updated!");
     }
-    resetToogleErrors();
     fetchUser({ userStore });
+    userStore.setIsNotification(true);
   };
 
   if (!userStore.loggedIn) {
@@ -114,166 +112,131 @@ const SettingsPage = ({ userStore }) => {
   }
 
   return (
-    <div className={"col-xs-12 col-sm-12 " + ` ${settingsWidth} `}>
-      {" "}
+    <Container component="main" maxWidth="xs">
       <NotificationModal userStore={userStore} />
-      <div
-        className={isMobile ? styles.settingsCardMobile : styles.settingsCard}
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 5,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
       >
-        <div className="card-body">
-          <h3 className="card-title text-center">Update Details</h3>
-          <div className="card-text" />
-          <form className={styles.inputForm} onSubmit={formik.handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="name">First Name</label>
-              <input
-                className="form-control"
+        <Typography component="h1" variant="h5">
+          Update Details
+        </Typography>
+        <Box
+          component="form"
+          noValidate
+          sx={{ mt: 1 }}
+          onSubmit={formik.handleSubmit}
+        >
+          <Grid container>
+            <Grid item xs={6} paddingRight={2}>
+              <TextField
+                margin="normal"
+                required
                 id="firstName"
+                label="First Name"
                 name="firstName"
-                type="text"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.firstName}
+                helperText={formik.errors.firstName}
+                error={formik.touched.firstName && formik.errors.firstName}
               />
-            </div>
-            {formik.touched.firstName && formik.errors.firstName ? (
-              <div className="alert alert-warning" role="alert">
-                {formik.errors.firstName}
-              </div>
-            ) : null}
-            <div className="form-group">
-              <label htmlFor="name">Last Name</label>
-              <input
-                className="form-control"
-                id="lastName"
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                margin="normal"
+                required
                 name="lastName"
-                type="text"
+                label="Last Name"
+                id="lastName"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.lastName}
+                helperText={formik.errors.lastName}
+                error={formik.touched.lastName && formik.errors.lastName}
               />
-            </div>
-            {formik.touched.lastName && formik.errors.lastName ? (
-              <div className="alert alert-warning" role="alert">
-                {formik.errors.lastName}
-              </div>
-            ) : null}
-            <div className="form-group">
-              <label htmlFor="email">Email Address</label>
-              <input
-                className="form-control"
-                id="email"
-                name="email"
-                type="text"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
-              />
-            </div>
-            {formik.touched.email && formik.errors.email ? (
-              <div className="alert alert-warning" role="alert">
-                {formik.errors.email}
-              </div>
-            ) : null}
-            <div className="form-group">
-              <label htmlFor="currentPassword">Current Password</label>
-              <input
-                className="form-control"
-                id="currentPassword"
-                name="currentPassword"
-                type="password"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.currentPassword}
-              />
-            </div>
-            {formik.touched.currentPassword && formik.errors.currentPassword ? (
-              <div className="alert alert-warning" role="alert">
-                {formik.errors.currentPassword}
-              </div>
-            ) : null}
-            <div className="form-group">
-              <label htmlFor="newPassword">New Password</label>
-              <input
-                className="form-control"
-                id="newPassword"
-                name="newPassword"
-                type="password"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.newPassword}
-              />
-            </div>
-            {formik.touched.newPassword && formik.errors.newPassword ? (
-              <div className="alert alert-warning" role="alert">
-                {formik.errors.newPassword}
-              </div>
-            ) : null}
-            <br />
-            {userStore.isLoading ? (
-              <button
-                type="submit"
-                className="btn btn-primary"
-                onMouseDown={(e) => e.preventDefault()}
-              >
-                Loading..
-                <span
-                  className="spinner-grow spinner-grow-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-              </button>
-            ) : (
-              <button
-                type="submit"
-                className="btn btn-primary"
-                onMouseDown={(e) => e.preventDefault()}
-              >
-                Update
-              </button>
-            )}
-            <br />
-            <br />
-            {alertMessage === "Successful Update." ? (
-              <div
-                className={"alert alert-success " + styles.toogleAlert}
-                role="alert"
-              >
-                {alertMessage}
-              </div>
-            ) : alertMessage !== "" ? (
-              <div className="alert alert-danger" role="alert">
-                {alertMessage}
-              </div>
-            ) : null}
-          </form>
-          <div>
-            {checked ? (
-              <p>Toggle Button to Disable Linked Bank Account</p>
-            ) : (
-              <p>Toggle Button to Enable Linked Bank Account</p>
-            )}
-            <Switch onChange={handleAccountLinkButton} checked={checked} />
-            {toogleAlertMessage === "Success!" ? (
-              <div className="alert alert-success" role="alert">
-                {toogleAlertMessage}
-              </div>
-            ) : toogleAlertMessage !== "" ? (
-              <div className="alert alert-danger" role="alert">
-                {toogleAlertMessage}
-              </div>
-            ) : null}
-          </div>
-          <button
-            className={"btn btn-primary " + styles.logoutAllBtn}
-            onMouseDown={(e) => e.preventDefault()}
-            onClick={handleLogoutAllDevices}
+            </Grid>
+          </Grid>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="email"
+            label="Email Address"
+            type="email"
+            id="email"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
+            helperText={formik.errors.email}
+            error={formik.touched.email && formik.errors.email}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="currentPassword"
+            label="Current Password"
+            type="password"
+            id="currentPassword"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.currentPassword}
+            helperText={formik.errors.currentPassword}
+            error={
+              formik.touched.currentPassword && formik.errors.currentPassword
+            }
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="newPassword"
+            label="New Password"
+            type="password"
+            id="newPassword"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.newPassword}
+            helperText={formik.errors.newPassword}
+            error={formik.touched.newPassword && formik.errors.newPassword}
+          />
+          <LoadingButton
+            className={styles.updateBtn}
+            loading={userStore.isLoading}
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
           >
-            Log out from all sessions
-          </button>
-        </div>
-      </div>
-    </div>
+            Update
+          </LoadingButton>
+        </Box>
+      </Box>
+      <LoadingButton
+        className={styles.logoutAllbtn}
+        onClick={handleLogoutAllDevices}
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+      >
+        Log out from all sessions
+      </LoadingButton>
+      <Stack direction="row" alignItems="center">
+        <Typography> Bank Account Unlinked</Typography>
+        <Switch
+          checked={checked}
+          onChange={handleAccountLinkButton}
+          color="success"
+        />
+        <Typography> Bank Account Linked</Typography>
+      </Stack>
+    </Container>
   );
 };
 

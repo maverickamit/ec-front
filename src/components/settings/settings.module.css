@@ -1,18 +1,10 @@
-.inputForm {
-  padding-top: 10px;
-  font-size: 14px;
-  margin-top: 30px;
+.updateBtn:focus,
+.updateBtn:active {
+  outline: none !important;
+  box-shadow: none !important;
 }
-.settingsCard {
-  width: 500px;
-}
-.settingsCardMobile {
-  width: 90vw;
-}
-.toogleAlert {
-  margin: 10px 0 10px 0;
-}
-
-.logoutAllBtn {
-  margin: 10px 0 10px 0;
+.logoutAllbtn:focus,
+.logoutAllbtn:active {
+  outline: none !important;
+  box-shadow: none !important;
 }
