@@ -1,34 +1,35 @@
 import React from "react";
-import Modal from "react-modal";
 import { observer } from "mobx-react";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
 
 const NotificationModal = ({ userStore }) => {
   const customStyles = {
-    content: {
-      top: "20%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-    },
+    top: "-70%",
   };
 
   function closeModal() {
     userStore.setIsNotification(false);
   }
   return (
-    <Modal
-      isOpen={userStore.isNotification}
+    <Dialog
       style={customStyles}
-      contentLabel="Example Modal"
-      ariaHideApp={false}
+      open={userStore.isNotification}
+      onClose={closeModal}
+      aria-describedby="alert-dialog-description"
     >
-      <button className="btn btn-primary float-right" onClick={closeModal}>
-        x
-      </button>
-      <div>{userStore.notification}</div>
-    </Modal>
+      <DialogContent>
+        <DialogContentText id="alert-dialog-description">
+          {userStore.notification}
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={closeModal}>Close</Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 
