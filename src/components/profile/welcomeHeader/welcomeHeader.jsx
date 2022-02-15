@@ -1,35 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react";
 import { prodUrl } from "../../urls";
-import Uppy from "@uppy/core";
-import XHRUpload from "@uppy/xhr-upload";
-import { DragDrop } from "@uppy/react";
 import "./../profile.css";
 import styles from "./welcomeHeader.module.css";
 
 const WelcomeHeader = ({ userStore }) => {
-  const uppy = new Uppy({
-    autoProceed: true,
-  });
-
-  uppy.use(XHRUpload, {
-    endpoint: prodUrl + "/users/me/avatar",
-    headers: {
-      Authorization: "Bearer " + userStore.token,
-    },
-    fieldName: "avatar",
-    formData: true,
-  });
-
-  uppy.on("upload-error", (file, error, response) => {
-    userStore.setNotification("Please choose an image file of size below 1 MB");
-    userStore.setIsNotification(true);
-  });
-
-  uppy.on("upload-success", (file, response) => {
-    window.location.reload();
-  });
-
   const [emailReset, setEmailReset] = useState(false);
   const [sum, setSum] = useState(0);
 
@@ -39,7 +14,7 @@ const WelcomeHeader = ({ userStore }) => {
       num += userStore.user.amountsCharged[i].amount;
     }
     setSum(num / 100);
-  });
+  }, [userStore.user.amountsCharged]);
 
   const handleResendButton = async () => {
     const response = await fetch(prodUrl + "/users/authenticate", {
@@ -64,25 +39,11 @@ const WelcomeHeader = ({ userStore }) => {
       <div className="col-sm-4 col-md-2">
         <div className="d-flex justify-content-center">
           <img
-            src={`${prodUrl}/users/${userStore.user._id}/avatar`}
+            src={`${prodUrl}/users/${
+              userStore.user._id
+            }/avatar?${global.Date.now()}`}
             alt=""
             className={"rounded-circle img-fluid " + styles.avatar}
-          />
-        </div>
-        <br />
-        <div
-          className={
-            " d-flex justify-content-center btn " + styles.updateAvatarBtn
-          }
-        >
-          <DragDrop
-            uppy={uppy}
-            locale={{
-              strings: {
-                dropHereOr: " Update Avatar",
-                browse: "browse",
-              },
-            }}
           />
         </div>
       </div>

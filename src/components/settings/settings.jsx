@@ -3,7 +3,10 @@ import { observer } from "mobx-react";
 import { prodUrl } from "../urls";
 import fetchUser from "../modules/fetchUser";
 import { useFormik } from "formik";
-import { Link, Redirect } from "react-router-dom";
+import { DragDrop } from "@uppy/react";
+import XHRUpload from "@uppy/xhr-upload";
+import Uppy from "@uppy/core";
+import { Redirect, useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import {
   TextField,
@@ -14,6 +17,7 @@ import {
   CssBaseline,
   Switch,
   Stack,
+  Avatar,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import NotificationModal from "../modal/notification";
@@ -21,6 +25,30 @@ import "./settings.css";
 import styles from "./settings.module.css";
 
 const SettingsPage = ({ userStore }) => {
+  const history = useHistory();
+
+  const uppy = new Uppy({
+    autoProceed: true,
+  });
+
+  uppy.use(XHRUpload, {
+    endpoint: prodUrl + "/users/me/avatar",
+    headers: {
+      Authorization: "Bearer " + userStore.token,
+    },
+    fieldName: "avatar",
+    formData: true,
+  });
+
+  uppy.on("upload-error", (file, error, response) => {
+    userStore.setNotification("Please choose an image file of size below 1 MB");
+    userStore.setIsNotification(true);
+  });
+
+  uppy.on("upload-success", (file, response) => {
+    history.push("/profile/settings");
+  });
+
   const initialValues = {
     firstName: userStore.user.firstName,
     lastName: userStore.user.lastName,
@@ -124,8 +152,38 @@ const SettingsPage = ({ userStore }) => {
         }}
       >
         <Typography component="h1" variant="h5">
-          Update Details
+          Update Profile
         </Typography>
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          marginTop={3}
+          marginBottom={3}
+        >
+          <Grid item xs={6}>
+            <Avatar
+              sx={{ width: 100, height: 100 }}
+              src={`${prodUrl}/users/${
+                userStore.user._id
+              }/avatar?${global.Date.now()}`}
+              s
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <DragDrop
+              uppy={uppy}
+              locale={{
+                strings: {
+                  dropHereOr: " Update Avatar",
+                  browse: "browse",
+                },
+              }}
+            />
+          </Grid>
+        </Grid>
+
         <Box
           component="form"
           noValidate
