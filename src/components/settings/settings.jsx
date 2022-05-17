@@ -99,17 +99,20 @@ const SettingsPage = ({ userStore }) => {
           password: values.newPassword,
           oldPassword: values.currentPassword,
         }),
-      }).then((response) => {
-        if (response.status === 200) {
-          userStore.setNotification("Successfully updated details.");
-          fetchUser({ userStore });
-        } else {
-          userStore.setNotification(
-            "Unsuccessful update. Please use correct password."
-          );
-        }
-      });
-      userStore.setIsNotification(true);
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            fetchUser({ userStore });
+            userStore.setNotification("Successfully updated details.");
+          } else {
+            userStore.setNotification(
+              "Unsuccessful update. Please use correct password."
+            );
+          }
+        })
+        .then(() => {
+          userStore.setIsNotification(true);
+        });
     },
   });
 
