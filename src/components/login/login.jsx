@@ -14,6 +14,7 @@ import {
   Container,
   CssBaseline,
 } from "@mui/material";
+import NotificationModal from "../modal/notification";
 import { LoadingButton } from "@mui/lab";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import "./login.css";
@@ -78,6 +79,8 @@ const UserLogin = ({ userStore }) => {
 
   return (
     <Container component="main" maxWidth="xs">
+      <NotificationModal userStore={userStore} />
+
       <CssBaseline />
       <Box
         sx={{

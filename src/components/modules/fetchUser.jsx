@@ -12,11 +12,11 @@ const fetchUser = ({ userStore }) => {
       if (response.status === 200) {
         return response.json();
       } else {
-        return "unable to login";
+        return "error fetching user";
       }
     })
     .then((data) => {
-      if (data === "unable to login") {
+      if (data === "error fetching user") {
         userStore.setLoggedIn(false);
         userStore.setNotification("Session is expired.Please login again.");
         userStore.setIsNotification(true);
