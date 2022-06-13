@@ -5,6 +5,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
+import fetchUser from "../modules/fetchUser";
 
 const NotificationModal = ({ userStore }) => {
   const customStyles = {
@@ -12,6 +13,7 @@ const NotificationModal = ({ userStore }) => {
   };
 
   function closeModal() {
+    fetchUser({ userStore });
     userStore.setIsNotification(false);
   }
   return (

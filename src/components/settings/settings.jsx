@@ -102,7 +102,6 @@ const SettingsPage = ({ userStore }) => {
       })
         .then((response) => {
           if (response.status === 200) {
-            fetchUser({ userStore });
             userStore.setNotification("Successfully updated details.");
           } else {
             userStore.setNotification(
@@ -134,7 +133,6 @@ const SettingsPage = ({ userStore }) => {
       setChecked(!checked);
       userStore.setNotification("Bank account linking status updated!");
     }
-    fetchUser({ userStore });
     userStore.setIsNotification(true);
   };
 
